@@ -11,12 +11,12 @@ describe("getPackageEstimates", () => {
 		mockFetch.mockResolvedValue({
 			json: () => [
 				{
-					estimated_money: "12.34",
+					estimated_money: 12.34,
 					lifted: false,
 					name: "abc",
 				},
 				{
-					estimated_money: "56.78",
+					estimated_money: 56.78,
 					lifted: true,
 					name: "def",
 				},
@@ -27,12 +27,12 @@ describe("getPackageEstimates", () => {
 
 		expect(result).toEqual([
 			{
-				estimatedMoney: "12.34",
+				estimatedMoney: 12.34,
 				lifted: false,
 				name: "abc",
 			},
 			{
-				estimatedMoney: "56.78",
+				estimatedMoney: 56.78,
 				lifted: true,
 				name: "def",
 			},

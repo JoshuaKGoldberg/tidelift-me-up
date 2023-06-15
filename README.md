@@ -41,11 +41,21 @@ npx tidelift-me-up
 ✅ ghi-jkl is already lifted for $50.0/mo.
 ```
 
-If you are logged into npm, your npm username will be what's used.
-You can specify a username with `--username`:
+> Tip: add `| grep yet` to filter to only packages that are not yet lifted.
+>
+> ```shell
+> npx tidelift-me-up | grep yet
+> ```
+
+### Options
+
+- `--since` _(default: 2 years ago)_: A date that packages need to have been updated since to be considered
+  - This will be provided as a string to the `Date` constructor
+- `--username` _(default: result of `npm whoami`)_: The npm username to search for packages maintained by
+  - The search is done by [`npm-user-packages`](https://github.com/kevva/npm-user-packages), which fetches from [npm.io](https://npm.io)
 
 ```shell
-npx tidelift-me-up --username your-username
+npx tidelift-me-up --since 2020 --username your-username
 ```
 
 ## Development
