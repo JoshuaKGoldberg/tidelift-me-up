@@ -8,19 +8,20 @@ export async function tideliftMeUpCli(args: string[]) {
 	const { values } = parseArgs({
 		args,
 		options: {
+			since: { type: "string" },
 			username: { type: "string" },
 		},
 		tokens: true,
 	});
 
-	const { username = await getNpmWhoami() } = values;
+	const { since, username = await getNpmWhoami() } = values;
 	if (!username) {
 		throw new Error(
 			"Either log in to npm or provide a username with --username."
 		);
 	}
 
-	const packageEstimates = await tideliftMeUp({ username });
+	const packageEstimates = await tideliftMeUp({ since, username });
 
 	for (const packageEstimate of packageEstimates) {
 		const currency = new Intl.NumberFormat("en-US", {
