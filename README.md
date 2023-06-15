@@ -49,13 +49,14 @@ npx tidelift-me-up
 
 ### Options
 
+- `--ownership` _(default: `["author", "publisher"]`)_: If provided, any filters user packages must match one of based on username: `"author"`, `"maintainer"`, and/or `"publisher"`
 - `--since` _(default: 2 years ago)_: A date that packages need to have been updated since to be considered
   - This will be provided as a string to the `Date` constructor
 - `--username` _(default: result of `npm whoami`)_: The npm username to search for packages maintained by
   - The search is done by [`npm-user-packages`](https://github.com/kevva/npm-user-packages), which fetches from [npm.io](https://npm.io)
 
 ```shell
-npx tidelift-me-up --since 2020 --username your-username
+npx tidelift-me-up --ownership author --ownership publisher --since 2020 --username your-username
 ```
 
 ## Development

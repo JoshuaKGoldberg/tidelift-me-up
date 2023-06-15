@@ -1,0 +1,48 @@
+import { PackageData } from "npm-user-packages";
+
+import { PackageOwnershipForm } from "./packageOwnershipForms.js";
+
+export interface FilterSettings {
+	ownership: PackageOwnershipForm[];
+	since: Date;
+	username: string;
+}
+
+export type UserPackageData = Pick<
+	PackageData,
+	"author" | "date" | "maintainers" | "publisher"
+>;
+
+export function createUserPackagesFilter({
+	ownership,
+	since,
+	username,
+}: FilterSettings) {
+	return (userPackage: UserPackageData) => {
+		if (new Date(userPackage.date) < since) {
+			return false;
+		}
+
+		if (
+			!ownership.some((ownershipForm) => {
+				switch (ownershipForm) {
+					case "author":
+						// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+						return userPackage.author?.username === username;
+
+					case "maintainer":
+						return userPackage.maintainers.some(
+							(maintainer) => maintainer.username === username
+						);
+
+					case "publisher":
+						return userPackage.publisher.username === username;
+				}
+			})
+		) {
+			return false;
+		}
+
+		return true;
+	};
+}

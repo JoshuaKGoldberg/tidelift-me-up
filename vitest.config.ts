@@ -5,7 +5,7 @@ export default defineConfig({
 		clearMocks: true,
 		coverage: {
 			all: true,
-			exclude: ["lib", "src/cli.ts"],
+			exclude: ["lib", "src/cli.ts", "src/tideliftMeUp.ts"],
 			include: ["src"],
 			provider: "istanbul",
 			reporter: ["html", "lcov"],

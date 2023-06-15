@@ -36,7 +36,9 @@ describe("tideliftMeUpCli", () => {
 		await tideliftMeUpCli(["--username", username]);
 
 		expect(mockGetNpmWhoami).not.toHaveBeenCalled();
-		expect(mockTideliftMeUp).toHaveBeenCalledWith({ username });
+		expect(mockTideliftMeUp).toHaveBeenCalledWith({
+			username,
+		});
 	});
 
 	it("logs packages for a username when --username is not provided and the user is logged in", async () => {
@@ -47,7 +49,9 @@ describe("tideliftMeUpCli", () => {
 
 		await tideliftMeUpCli([]);
 
-		expect(mockTideliftMeUp).toHaveBeenCalledWith({ username });
+		expect(mockTideliftMeUp).toHaveBeenCalledWith({
+			username,
+		});
 	});
 
 	it("logs a package as already lifted when it is", async () => {
