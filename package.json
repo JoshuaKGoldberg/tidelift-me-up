@@ -1,6 +1,6 @@
 {
 	"name": "tidelift-me-up",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"description": "Finds your npm packages that are eligible for Tidelift funding. 💸",
 	"repository": {
 		"type": "git",
