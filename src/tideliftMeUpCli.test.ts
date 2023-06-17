@@ -1,4 +1,3 @@
-import chalk from "chalk";
 import { describe, expect, it, vi } from "vitest";
 
 import { tideliftMeUpCli } from "./tideliftMeUpCli.js";
