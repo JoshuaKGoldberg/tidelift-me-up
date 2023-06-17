@@ -1,9 +1,15 @@
-import chalk from "chalk";
 import { parseArgs } from "node:util";
 
 import { assertValidOwnership } from "./assertValidOwnership.js";
 import { getNpmWhoami } from "./getNpmWhoami.js";
+import { jsonReporter } from "./reporters/jsonReporter.js";
+import { textReporter } from "./reporters/textReporter.js";
 import { tideliftMeUp } from "./tideliftMeUp.js";
+
+const reporters = {
+	json: jsonReporter,
+	text: textReporter,
+};
 
 export async function tideliftMeUpCli(args: string[]) {
 	const { values } = parseArgs({
@@ -13,16 +19,28 @@ export async function tideliftMeUpCli(args: string[]) {
 				multiple: true,
 				type: "string",
 			},
+			reporter: { type: "string" },
 			since: { type: "string" },
 			username: { type: "string" },
 		},
 		tokens: true,
 	});
 
-	const { ownership, since, username = await getNpmWhoami() } = values;
+	const {
+		ownership,
+		reporter: reporterRaw,
+		since,
+		username: usernameRaw,
+	} = values;
 
 	assertValidOwnership(ownership);
 
+	const reporter = reporterRaw ?? "text";
+	if (reporter !== "json" && reporter !== "text") {
+		throw new Error(`--reporter must be "json" or "text", not ${reporter}.`);
+	}
+
+	const username = usernameRaw ?? (await getNpmWhoami());
 	if (!username) {
 		throw new Error(
 			"Either log in to npm or provide a username with --username."
@@ -31,28 +49,5 @@ export async function tideliftMeUpCli(args: string[]) {
 
 	const packageEstimates = await tideliftMeUp({ ownership, since, username });
 
-	for (const packageEstimate of packageEstimates) {
-		const currency = new Intl.NumberFormat("en-US", {
-			currency: "USD",
-			style: "currency",
-		}).format(packageEstimate.estimatedMoney);
-
-		if (packageEstimate.lifted) {
-			console.log(
-				chalk.gray(
-					`✅ ${packageEstimate.name} is already lifted for ${currency}/mo.`
-				)
-			);
-		} else {
-			console.log(
-				[
-					chalk.cyan(`👉 `),
-					chalk.cyanBright(packageEstimate.name),
-					` is not yet lifted, but is estimated for `,
-					chalk.cyanBright(`${currency}/mo`),
-					`.`,
-				].join("")
-			);
-		}
-	}
+	reporters[reporter](packageEstimates);
 }

@@ -1,4 +1,3 @@
-import chalk from "chalk";
 import { describe, expect, it, vi } from "vitest";
 
 import { tideliftMeUpCli } from "./tideliftMeUpCli.js";
@@ -20,6 +19,17 @@ vi.mock("./tideliftMeUp.js", () => ({
 }));
 
 describe("tideliftMeUpCli", () => {
+	it("throws an error when --reporter is provided and not json or text", async () => {
+		mockGetNpmWhoami.mockResolvedValue(undefined);
+
+		const reporter = "invalid";
+		await expect(() =>
+			tideliftMeUpCli(["--reporter", reporter])
+		).rejects.toEqual(
+			new Error(`--reporter must be "json" or "text", not ${reporter}.`)
+		);
+	});
+
 	it("throws an error when --username isn't provided and getNpmWhoami returns undefined", async () => {
 		mockGetNpmWhoami.mockResolvedValue(undefined);
 
@@ -52,47 +62,5 @@ describe("tideliftMeUpCli", () => {
 		expect(mockTideliftMeUp).toHaveBeenCalledWith({
 			username,
 		});
-	});
-
-	it("logs a package as already lifted when it is", async () => {
-		const logger = vi.spyOn(console, "log").mockImplementation(() => undefined);
-
-		mockTideliftMeUp.mockResolvedValue([
-			{
-				estimatedMoney: "12.34",
-				lifted: true,
-				name: "abc123",
-			},
-		]);
-
-		await tideliftMeUpCli(["--username", "abc123"]);
-
-		expect(logger).toHaveBeenCalledWith(
-			chalk.gray(`✅ abc123 is already lifted for $12.34/mo.`)
-		);
-	});
-
-	it("logs a package as liftable when it is not yet lifted", async () => {
-		const logger = vi.spyOn(console, "log").mockImplementation(() => undefined);
-
-		mockTideliftMeUp.mockResolvedValue([
-			{
-				estimatedMoney: "12.34",
-				lifted: false,
-				name: "abc123",
-			},
-		]);
-
-		await tideliftMeUpCli(["--username", "abc123"]);
-
-		expect(logger).toHaveBeenCalledWith(
-			[
-				chalk.cyan(`👉 `),
-				chalk.cyanBright("abc123"),
-				` is not yet lifted, but is estimated for `,
-				chalk.cyanBright(`$12.34/mo`),
-				`.`,
-			].join("")
-		);
 	});
 });
