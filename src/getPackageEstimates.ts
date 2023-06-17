@@ -1,14 +1,10 @@
+import { PackageEstimate } from "./types.js";
+
 interface PackageEstimateData {
 	estimated_money: string;
 	lifted: boolean;
 	name: string;
 	platform: "npm";
-}
-
-export interface PackageEstimate {
-	estimatedMoney: number;
-	lifted: boolean;
-	name: string;
 }
 
 export async function getPackageEstimates(

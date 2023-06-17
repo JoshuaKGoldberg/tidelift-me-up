@@ -1,20 +1,9 @@
 import { describe, expect, it } from "vitest";
 
-import {
-	UserPackageData,
-	createUserPackagesFilter,
-} from "./createUserPackagesFilter.js";
+import { createUserPackagesFilter } from "./createUserPackagesFilter.js";
+import { createFakePackageData } from "./fakes.js";
 
 const username = "abc123";
-
-const createPackageData = (overrides?: Partial<UserPackageData>) =>
-	({
-		author: { name: "" },
-		date: new Date().toString(),
-		maintainers: [],
-		publisher: { email: "", username: "" },
-		...overrides,
-	} satisfies UserPackageData);
 
 describe("createUserPackagesFilter", () => {
 	it("filters a package when its date predates since", () => {
@@ -25,7 +14,7 @@ describe("createUserPackagesFilter", () => {
 		});
 
 		const actual = filter(
-			createPackageData({
+			createFakePackageData({
 				author: { name: "", username },
 				date: new Date(Date.now() - 20_000).toString(),
 			})
@@ -42,7 +31,7 @@ describe("createUserPackagesFilter", () => {
 		});
 
 		const actual = filter(
-			createPackageData({
+			createFakePackageData({
 				author: { name: "", username },
 				date: new Date(Date.now() - 10_000).toString(),
 			})
@@ -59,7 +48,7 @@ describe("createUserPackagesFilter", () => {
 		});
 
 		const actual = filter(
-			createPackageData({
+			createFakePackageData({
 				author: { name: "", username: "other" },
 			})
 		);
@@ -75,7 +64,7 @@ describe("createUserPackagesFilter", () => {
 		});
 
 		const actual = filter(
-			createPackageData({
+			createFakePackageData({
 				author: { name: "", username },
 			})
 		);
@@ -91,7 +80,7 @@ describe("createUserPackagesFilter", () => {
 		});
 
 		const actual = filter(
-			createPackageData({
+			createFakePackageData({
 				maintainers: [{ email: "", username: "other" }],
 			})
 		);
@@ -107,7 +96,7 @@ describe("createUserPackagesFilter", () => {
 		});
 
 		const actual = filter(
-			createPackageData({
+			createFakePackageData({
 				maintainers: [{ email: "", username }],
 			})
 		);
@@ -123,7 +112,7 @@ describe("createUserPackagesFilter", () => {
 		});
 
 		const actual = filter(
-			createPackageData({
+			createFakePackageData({
 				publisher: { email: "", username: "other" },
 			})
 		);
@@ -139,7 +128,7 @@ describe("createUserPackagesFilter", () => {
 		});
 
 		const actual = filter(
-			createPackageData({
+			createFakePackageData({
 				publisher: { email: "", username },
 			})
 		);

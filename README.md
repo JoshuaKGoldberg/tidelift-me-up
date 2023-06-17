@@ -59,6 +59,37 @@ npx tidelift-me-up
 npx tidelift-me-up --ownership author --ownership publisher --since 2020 --username your-username
 ```
 
+## Node API
+
+This package also exports a `tideliftMeUp` function you can call to receive an array of results:
+
+```js
+import { tideliftMeUp } from "tidelift-me-up";
+
+await tideliftMeUp();
+/*
+[
+	{
+		estimatedMoney: 25,
+		lifted: false,
+		name: 'your-eligible-package'
+	}
+]
+*/
+```
+
+It takes in the same options as the CLI:
+
+```js
+import { tideliftMeUp } from "tidelift-me-up";
+
+await tideliftMeUp({
+	ownership: ["author", "publisher"],
+	since: new Date("2020"),
+	username: "your-username",
+});
+```
+
 ## Development
 
 See [`.github/CONTRIBUTING.md`](./.github/CONTRIBUTING.md), then [`.github/DEVELOPMENT.md`](./.github/DEVELOPMENT.md).
