@@ -1,16 +1,15 @@
-import {
-	PackageOwnershipForm,
-	packageOwnershipForms,
-} from "./packageOwnershipForms.js";
+import { PackageOwnership } from "./types.js";
+
+export const packageOwnerships = ["author", "maintainer", "publisher"];
 
 export function assertValidOwnership(
-	ownership: string[] | undefined
-): asserts ownership is PackageOwnershipForm[] | undefined {
-	if (ownership) {
-		for (const ownershipForm of ownership) {
-			if (!["author", "maintainer", "publisher"].includes(ownershipForm)) {
+	ownerships: string[] | undefined
+): asserts ownerships is PackageOwnership[] | undefined {
+	if (ownerships) {
+		for (const ownership of ownerships) {
+			if (!["author", "maintainer", "publisher"].includes(ownership)) {
 				throw new Error(
-					`Unknown --ownership: ${ownershipForm} (must be one of: ${packageOwnershipForms.join(
+					`Unknown --ownership: ${ownership} (must be one of: ${packageOwnerships.join(
 						", "
 					)})`
 				);
