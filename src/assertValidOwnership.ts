@@ -7,7 +7,7 @@ export function assertValidOwnership(
 ): asserts ownerships is PackageOwnership[] | undefined {
 	if (ownerships) {
 		for (const ownership of ownerships) {
-			if (!["author", "maintainer", "publisher"].includes(ownership)) {
+			if (!packageOwnerships.includes(ownership)) {
 				throw new Error(
 					`Unknown --ownership: ${ownership} (must be one of: ${packageOwnerships.join(
 						", "
