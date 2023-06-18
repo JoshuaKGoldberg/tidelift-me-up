@@ -3,3 +3,5 @@ export interface PackageEstimate {
 	lifted: boolean;
 	name: string;
 }
+
+export type PackageOwnership = "author" | "maintainer" | "publisher";

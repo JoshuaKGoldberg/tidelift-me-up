@@ -3,10 +3,10 @@ import npmUserPackages from "npm-user-packages";
 import { createUserPackagesFilter } from "./createUserPackagesFilter.js";
 import { getNpmWhoami } from "./getNpmWhoami.js";
 import { getPackageEstimates } from "./getPackageEstimates.js";
-import { PackageOwnershipForm } from "./packageOwnershipForms.js";
+import { PackageOwnership } from "./types.js";
 
 export interface TideliftMeUpSettings {
-	ownership?: PackageOwnershipForm[];
+	ownership?: PackageOwnership[];
 	since?: Date | number | string;
 	username?: string;
 }

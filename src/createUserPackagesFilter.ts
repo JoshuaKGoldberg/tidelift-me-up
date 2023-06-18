@@ -1,9 +1,9 @@
 import { PackageData } from "npm-user-packages";
 
-import { PackageOwnershipForm } from "./packageOwnershipForms.js";
+import { PackageOwnership } from "./types.js";
 
 export interface FilterSettings {
-	ownership: PackageOwnershipForm[];
+	ownership: PackageOwnership[];
 	since: Date;
 	username: string;
 }
