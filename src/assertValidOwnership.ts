@@ -1,6 +1,6 @@
 import { PackageOwnership } from "./types.js";
 
-export const packageOwnerships = ["author", "maintainer", "publisher"];
+const packageOwnerships = ["author", "maintainer", "publisher"];
 
 export function assertValidOwnership(
 	ownerships: string[] | undefined
