@@ -1,5 +1,4 @@
-import { PackageData } from "npm-user-packages";
-
+import { PackageData } from "./getNpmUserPackages.js";
 import { PackageOwnership } from "./types.js";
 
 export interface FilterSettings {

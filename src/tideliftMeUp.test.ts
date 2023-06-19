@@ -3,13 +3,13 @@ import { describe, expect, it, vi } from "vitest";
 import { createFakePackageData } from "./fakes.js";
 import { tideliftMeUp } from "./tideliftMeUp.js";
 
-const mockNpmUserPackages = vi
+const mockGetNpmUserPackages = vi
 	.fn()
 	.mockResolvedValue([createFakePackageData()]);
 
-vi.mock("npm-user-packages", () => ({
-	get default() {
-		return mockNpmUserPackages;
+vi.mock("./getNpmUserPackages.js", () => ({
+	get getNpmUserPackages() {
+		return mockGetNpmUserPackages;
 	},
 }));
 
@@ -35,22 +35,21 @@ describe("tideliftMeUp", () => {
 	it("calls npmUserPackages with the npm name when the user is logged in", async () => {
 		const username = "abc123";
 
-		mockNpmUserPackages;
 		mockGetNpmWhoami.mockResolvedValue(username);
 
 		await tideliftMeUp();
 
-		expect(mockNpmUserPackages).toHaveBeenCalledWith(username);
+		expect(mockGetNpmUserPackages).toHaveBeenCalledWith(username);
 	});
 
 	it("calls npmUserPackages with the provided username when it exists", async () => {
 		const username = "abc123";
 
-		mockNpmUserPackages.mockResolvedValue([createFakePackageData()]);
+		mockGetNpmUserPackages.mockResolvedValue([createFakePackageData()]);
 		mockGetNpmWhoami.mockRejectedValue(new Error("Should not be called."));
 
 		await tideliftMeUp({ username });
 
-		expect(mockNpmUserPackages).toHaveBeenCalledWith(username);
+		expect(mockGetNpmUserPackages).toHaveBeenCalledWith(username);
 	});
 });
