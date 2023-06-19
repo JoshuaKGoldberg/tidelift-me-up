@@ -20,6 +20,7 @@
 		"lcov",
 		"markdownlintignore",
 		"npmignore",
+		"npms",
 		"npmpackagejsonlintrc",
 		"outro",
 		"packagejson",
