@@ -49,11 +49,10 @@ interface ResponseResult {
 export async function getNpmUserPackages(maintainer: string) {
 	const packages: PackageData[] = [];
 	const size = 250;
-	let from = 0;
 
 	while (true) {
 		const response = await fetch(
-			`https://api.npm.io/v2/search?q=maintainer:${maintainer}&size=${size}&from=${from}`,
+			`https://api.npm.io/v2/search?q=maintainer:${maintainer}&size=${size}&from=${packages.length}`,
 			{
 				headers: { "Content-Type": "application/json" },
 			}
@@ -62,9 +61,7 @@ export async function getNpmUserPackages(maintainer: string) {
 
 		packages.push(...body.results.map((result) => result.package));
 
-		if (body.total <= from || body.total > size) {
-			from += size - 1;
-		} else {
+		if (packages.length >= body.total) {
 			return packages;
 		}
 	}

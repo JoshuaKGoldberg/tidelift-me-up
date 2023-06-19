@@ -23,15 +23,22 @@ describe("getNpmUserPackages", () => {
 	});
 
 	it("returns results when they are paginated", async () => {
-		const packageNames = new Array(602).fill(undefined).map((_, i) => `${i}`);
+		const total = 501;
+		const packageNames = new Array(total).fill(undefined).map((_, i) => `${i}`);
 
-		mockFetch.mockResolvedValue({
-			json: () => ({
-				results: packageNames.map((responseName) => ({
-					package: responseName,
-				})),
-				total: 2,
-			}),
+		let calls = 0;
+		mockFetch.mockImplementation(() => {
+			const start = calls * 250;
+			const end = (calls + 1) * 250;
+			calls += 1;
+			return {
+				json: () => ({
+					results: packageNames.slice(start, end).map((responseName) => ({
+						package: responseName,
+					})),
+					total,
+				}),
+			};
 		});
 
 		const actual = await getNpmUserPackages("maintainer");
