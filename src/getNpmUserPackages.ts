@@ -52,7 +52,7 @@ export async function getNpmUserPackages(maintainer: string) {
 
 	while (true) {
 		const response = await fetch(
-			`https://api.npm.io/v2/search?q=maintainer:${maintainer}&size=${size}&from=${packages.length}`,
+			`https://api.npms.io/v2/search?q=maintainer:${maintainer}&size=${size}&from=${packages.length}`,
 			{
 				headers: { "Content-Type": "application/json" },
 			}
