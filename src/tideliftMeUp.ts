@@ -4,6 +4,7 @@ import { createUserPackagesFilter } from "./createUserPackagesFilter.js";
 import { getNpmWhoami } from "./getNpmWhoami.js";
 import { getPackageEstimates } from "./getPackageEstimates.js";
 import { PackageOwnershipForm } from "./packageOwnershipForms.js";
+import { EstimatedPackage } from "./types.js";
 
 export interface TideliftMeUpSettings {
 	ownership?: PackageOwnershipForm[];
@@ -15,7 +16,7 @@ export async function tideliftMeUp({
 	ownership = ["author", "publisher"],
 	since = getTwoYearsAgo(),
 	username,
-}: TideliftMeUpSettings = {}) {
+}: TideliftMeUpSettings = {}): Promise<EstimatedPackage[]> {
 	username ??= await getNpmWhoami();
 	if (!username) {
 		throw new Error("Either log in to npm or provide a `username`.");
@@ -24,10 +25,18 @@ export async function tideliftMeUp({
 	const userPackages = (await npmUserPackages(username)).filter(
 		createUserPackagesFilter({ ownership, since: new Date(since), username })
 	);
+	const userPackagesByName = Object.fromEntries(
+		userPackages.map((userPackage) => [userPackage.name, userPackage])
+	);
 
-	return await getPackageEstimates(
+	const packageEstimates = await getPackageEstimates(
 		userPackages.map((userPackage) => userPackage.name)
 	);
+
+	return packageEstimates.map((packageEstimate) => ({
+		...packageEstimate,
+		data: userPackagesByName[packageEstimate.name],
+	}));
 }
 
 function getTwoYearsAgo() {
