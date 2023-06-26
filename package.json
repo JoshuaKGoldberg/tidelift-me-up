@@ -1,6 +1,6 @@
 {
 	"name": "tidelift-me-up",
-	"version": "0.1.2",
+	"version": "0.1.6",
 	"description": "Finds your npm packages that are eligible for Tidelift funding. 💸",
 	"repository": {
 		"type": "git",
@@ -40,13 +40,11 @@
 	},
 	"dependencies": {
 		"chalk": "^5.2.0",
-		"npm-user-packages": "^3.0.0",
 		"npm-whoami": "^1.1.4"
 	},
 	"devDependencies": {
 		"@types/eslint": "^8.37.0",
 		"@types/node": "^20.3.1",
-		"@types/npm-user-packages": "^3.0.1",
 		"@typescript-eslint/eslint-plugin": "^5.59.5",
 		"@typescript-eslint/parser": "^5.59.5",
 		"@vitest/coverage-istanbul": "^0.31.0",
@@ -67,10 +65,10 @@
 		"eslint-plugin-yml": "^1.7.0",
 		"husky": "^8.0.3",
 		"jsonc-eslint-parser": "^2.3.0",
-		"knip": "2.13.0",
+		"knip": "2.14.1",
 		"lint-staged": "^13.2.2",
 		"markdownlint": "^0.29.0",
-		"markdownlint-cli": "^0.34.0",
+		"markdownlint-cli": "^0.35.0",
 		"npm-package-json-lint": "^6.4.0",
 		"npm-package-json-lint-config-default": "^5.0.0",
 		"prettier": "^2.8.8",
@@ -83,7 +81,7 @@
 		"vitest": "^0.32.0",
 		"yaml-eslint-parser": "^1.2.2"
 	},
-	"packageManager": "pnpm@8.6.0",
+	"packageManager": "pnpm@8.6.3",
 	"engines": {
 		"node": ">=18"
 	},

@@ -6,7 +6,7 @@
 	<a href="#contributors" target="_blank">
 <!-- prettier-ignore-start -->
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-<img alt="All Contributors: 1" src="https://img.shields.io/badge/all_contributors-1-21bb42.svg" />
+<img alt="All Contributors: 2" src="https://img.shields.io/badge/all_contributors-2-21bb42.svg" />
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <!-- prettier-ignore-end -->
 	</a>
@@ -50,13 +50,14 @@ npx tidelift-me-up
 ### Options
 
 - `--ownership` _(default: `["author", "publisher"]`)_: If provided, any filters user packages must match one of based on username: `"author"`, `"maintainer"`, and/or `"publisher"`
+- `--reporter` _(default: `"text"`)_: Either `"json"` to output a raw JSON string, or `"text"` for human-readable output
 - `--since` _(default: 2 years ago)_: A date that packages need to have been updated since to be considered
   - This will be provided as a string to the `Date` constructor
 - `--username` _(default: result of `npm whoami`)_: The npm username to search for packages maintained by
-  - The search is done by [`npm-user-packages`](https://github.com/kevva/npm-user-packages), which fetches from [npm.io](https://npm.io)
+  - The search is done by a network call to [npms.io](https://npms.io)
 
 ```shell
-npx tidelift-me-up --ownership author --ownership publisher --since 2020 --username your-username
+npx tidelift-me-up --ownership author --ownership publisher --reporter json --since 2020 --username your-username
 ```
 
 ## Node API
@@ -78,7 +79,7 @@ await tideliftMeUp();
 */
 ```
 
-It takes in the same options as the CLI:
+It takes in the same options as the CLI, except for `reporter`:
 
 ```js
 import { tideliftMeUp } from "tidelift-me-up";
@@ -104,7 +105,8 @@ Thanks! 💖
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="http://www.joshuakgoldberg.com"><img src="https://avatars.githubusercontent.com/u/3335181?v=4?s=100" width="100px;" alt="Josh Goldberg"/><br /><sub><b>Josh Goldberg</b></sub></a><br /><a href="#tool-JoshuaKGoldberg" title="Tools">🔧</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/ljharb"><img src="https://avatars.githubusercontent.com/u/45469?v=4?s=100" width="100px;" alt="Jordan Harband"/><br /><sub><b>Jordan Harband</b></sub></a><br /><a href="#ideas-ljharb" title="Ideas, Planning, & Feedback">🤔</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://www.joshuakgoldberg.com"><img src="https://avatars.githubusercontent.com/u/3335181?v=4?s=100" width="100px;" alt="Josh Goldberg"/><br /><sub><b>Josh Goldberg</b></sub></a><br /><a href="#tool-JoshuaKGoldberg" title="Tools">🔧</a> <a href="https://github.com/JoshuaKGoldberg/tidelift-me-up/commits?author=JoshuaKGoldberg" title="Code">💻</a> <a href="https://github.com/JoshuaKGoldberg/tidelift-me-up/issues?q=author%3AJoshuaKGoldberg" title="Bug reports">🐛</a> <a href="#ideas-JoshuaKGoldberg" title="Ideas, Planning, & Feedback">🤔</a></td>
     </tr>
   </tbody>
 </table>
