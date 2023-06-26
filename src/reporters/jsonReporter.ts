@@ -1,5 +1,5 @@
-import { PackageEstimate } from "../types.js";
+import { EstimatedPackage } from "../types.js";
 
-export function jsonReporter(packageEstimates: PackageEstimate[]) {
-	console.log(JSON.stringify(packageEstimates));
+export function jsonReporter(estimatedPackages: EstimatedPackage[]) {
+	console.log(JSON.stringify(estimatedPackages));
 }

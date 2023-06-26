@@ -1,6 +1,7 @@
 import chalk from "chalk";
 import { describe, expect, it, vi } from "vitest";
 
+import { createFakePackageData } from "../fakes.js";
 import { textReporter } from "./textReporter.js";
 
 describe("textReporter", () => {
@@ -9,6 +10,7 @@ describe("textReporter", () => {
 
 		textReporter([
 			{
+				data: createFakePackageData(),
 				estimatedMoney: 12.34,
 				lifted: true,
 				name: "abc123",
@@ -25,6 +27,7 @@ describe("textReporter", () => {
 
 		textReporter([
 			{
+				data: createFakePackageData(),
 				estimatedMoney: 12.34,
 				lifted: false,
 				name: "abc123",
