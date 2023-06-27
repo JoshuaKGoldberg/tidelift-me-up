@@ -21,7 +21,9 @@ vi.mock("./getNpmWhoami.js", () => ({
 	},
 }));
 
-vi.mock("./getPackageEstimates.js");
+vi.mock("./getPackageEstimates.js", () => ({
+	getPackageEstimates: () => [],
+}));
 
 describe("tideliftMeUp", () => {
 	it("throws an error when --username isn't provided and getNpmWhoami returns undefined", async () => {

@@ -1,25 +1,25 @@
 import chalk from "chalk";
 
-import { PackageEstimate } from "../types.js";
+import { EstimatedPackage } from "../types.js";
 
-export function textReporter(packageEstimates: PackageEstimate[]) {
-	for (const packageEstimate of packageEstimates) {
+export function textReporter(estimatedPackages: EstimatedPackage[]) {
+	for (const estimatedPackage of estimatedPackages) {
 		const currency = new Intl.NumberFormat("en-US", {
 			currency: "USD",
 			style: "currency",
-		}).format(packageEstimate.estimatedMoney);
+		}).format(estimatedPackage.estimatedMoney);
 
-		if (packageEstimate.lifted) {
+		if (estimatedPackage.lifted) {
 			console.log(
 				chalk.gray(
-					`✅ ${packageEstimate.name} is already lifted for ${currency}/mo.`
+					`✅ ${estimatedPackage.name} is already lifted for ${currency}/mo.`
 				)
 			);
 		} else {
 			console.log(
 				[
 					chalk.cyan(`👉 `),
-					chalk.cyanBright(packageEstimate.name),
+					chalk.cyanBright(estimatedPackage.name),
 					` is not yet lifted, but is estimated for `,
 					chalk.cyanBright(`${currency}/mo`),
 					`.`,

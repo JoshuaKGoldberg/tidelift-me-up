@@ -1,10 +1,23 @@
-import { UserPackageData } from "./createUserPackagesFilter.js";
+import { PackageData } from "npm-user-packages";
 
-export const createFakePackageData = (overrides?: Partial<UserPackageData>) =>
+export const createFakePackageData = (overrides?: Partial<PackageData>) =>
 	({
-		author: { name: "" },
-		date: new Date().toString(),
+		author: {
+			name: "",
+		},
+		date: "",
+		description: "",
+		keywords: [],
+		links: {
+			npm: "",
+		},
 		maintainers: [],
-		publisher: { email: "", username: "" },
+		name: "",
+		publisher: {
+			email: "",
+			username: "",
+		},
+		scope: "",
+		version: "",
 		...overrides,
-	} satisfies UserPackageData);
+	} satisfies PackageData);

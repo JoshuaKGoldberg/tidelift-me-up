@@ -1,5 +1,3 @@
-import { PackageEstimate } from "./types.js";
-
 interface PackageEstimateData {
 	estimated_money: string;
 	lifted: boolean;
@@ -7,9 +5,7 @@ interface PackageEstimateData {
 	platform: "npm";
 }
 
-export async function getPackageEstimates(
-	packageNames: string[]
-): Promise<PackageEstimate[]> {
+export async function getPackageEstimates(packageNames: string[]) {
 	const response = await fetch(
 		"https://tidelift.com/api/depci/estimate/bulk_estimates",
 		{

@@ -19,6 +19,9 @@ devDependencies:
   '@types/node':
     specifier: ^20.3.1
     version: 20.3.1
+  '@types/npm-user-packages':
+    specifier: ^3.0.1
+    version: 3.0.1
   '@typescript-eslint/eslint-plugin':
     specifier: ^5.59.5
     version: 5.59.5(@typescript-eslint/parser@5.59.5)(eslint@8.40.0)(typescript@5.0.4)
@@ -1186,6 +1189,10 @@ packages:
 
   /@types/normalize-package-data@2.4.1:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
+    dev: true
+
+  /@types/npm-user-packages@3.0.1:
+    resolution: {integrity: sha512-EPLHtduuKXrEPkmSM5NB7t5n7vxqh/Qz+UnvrdE4GPAR0dNR6W8i2rqdP8LYcDAFCuIhaSFocKBW5T21OXv0TA==}
     dev: true
 
   /@types/semver@7.3.13:
