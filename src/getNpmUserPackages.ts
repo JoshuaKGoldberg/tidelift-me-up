@@ -55,7 +55,7 @@ export async function getNpmUserPackages(maintainer: string) {
 			`https://api.npms.io/v2/search?q=maintainer:${maintainer}&size=${size}&from=${packages.length}`,
 			{
 				headers: { "Content-Type": "application/json" },
-			}
+			},
 		);
 		const body = (await response.json()) as ResponseBody;
 

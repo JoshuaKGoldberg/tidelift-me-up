@@ -11,19 +11,19 @@
 <!-- prettier-ignore-end -->
 	</a>
 	<a href="https://codecov.io/gh/JoshuaKGoldberg/tidelift-me-up" target="_blank">
-		<img alt="Codecov Test Coverage" src="https://codecov.io/gh/JoshuaKGoldberg/tidelift-me-up/branch/main/graph/badge.svg?token=eVIFY4MhfQ"/>
+		<img alt="Codecov Test Coverage" src="https://codecov.io/gh/JoshuaKGoldberg/tidelift-me-up/branch/main/graph/badge.svg"/>
 	</a>
 	<a href="https://github.com/JoshuaKGoldberg/tidelift-me-up/blob/main/.github/CODE_OF_CONDUCT.md" target="_blank">
 		<img alt="Contributor Covenant" src="https://img.shields.io/badge/code_of_conduct-enforced-21bb42" />
 	</a>
 	<a href="https://github.com/JoshuaKGoldberg/tidelift-me-up/blob/main/LICENSE.md" target="_blank">
-	    <img alt="License: MIT" src="https://img.shields.io/github/license/JoshuaKGoldberg/tidelift-me-up?color=21bb42">
-    </a>
+		<img alt="License: MIT" src="https://img.shields.io/github/license/JoshuaKGoldberg/tidelift-me-up?color=21bb42">
+	</a>
 	<a href="https://github.com/sponsors/JoshuaKGoldberg" target="_blank">
-    	<img alt="Sponsor: On GitHub" src="https://img.shields.io/badge/sponsor-on_github-21bb42.svg" />
-    </a>
+		<img alt="Sponsor: On GitHub" src="https://img.shields.io/badge/sponsor-on_github-21bb42.svg" />
+	</a>
 	<img alt="Style: Prettier" src="https://img.shields.io/badge/style-prettier-21bb42.svg" />
-    <img alt="TypeScript: Strict" src="https://img.shields.io/badge/typescript-strict-21bb42.svg" />
+	<img alt="TypeScript: Strict" src="https://img.shields.io/badge/typescript-strict-21bb42.svg" />
 </p>
 
 ## Usage
@@ -106,7 +106,7 @@ Thanks! 💖
   <tbody>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/ljharb"><img src="https://avatars.githubusercontent.com/u/45469?v=4?s=100" width="100px;" alt="Jordan Harband"/><br /><sub><b>Jordan Harband</b></sub></a><br /><a href="#ideas-ljharb" title="Ideas, Planning, & Feedback">🤔</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="http://www.joshuakgoldberg.com"><img src="https://avatars.githubusercontent.com/u/3335181?v=4?s=100" width="100px;" alt="Josh Goldberg"/><br /><sub><b>Josh Goldberg</b></sub></a><br /><a href="#tool-JoshuaKGoldberg" title="Tools">🔧</a> <a href="https://github.com/JoshuaKGoldberg/tidelift-me-up/commits?author=JoshuaKGoldberg" title="Code">💻</a> <a href="https://github.com/JoshuaKGoldberg/tidelift-me-up/issues?q=author%3AJoshuaKGoldberg" title="Bug reports">🐛</a> <a href="#ideas-JoshuaKGoldberg" title="Ideas, Planning, & Feedback">🤔</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://www.joshuakgoldberg.com"><img src="https://avatars.githubusercontent.com/u/3335181?v=4?s=100" width="100px;" alt="Josh Goldberg"/><br /><sub><b>Josh Goldberg</b></sub></a><br /><a href="#tool-JoshuaKGoldberg" title="Tools">🔧</a> <a href="https://github.com/JoshuaKGoldberg/tidelift-me-up/commits?author=JoshuaKGoldberg" title="Code">💻</a> <a href="https://github.com/JoshuaKGoldberg/tidelift-me-up/issues?q=author%3AJoshuaKGoldberg" title="Bug reports">🐛</a> <a href="#ideas-JoshuaKGoldberg" title="Ideas, Planning, & Feedback">🤔</a> <a href="#maintenance-JoshuaKGoldberg" title="Maintenance">🚧</a></td>
     </tr>
   </tbody>
 </table>
@@ -117,6 +117,4 @@ Thanks! 💖
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 <!-- spellchecker: enable -->
 
-<!-- You can remove this notice if you don't want it 🙂 no worries! -->
-
-> 💙 This package is based on [@JoshuaKGoldberg](https://github.com/JoshuaKGoldberg)'s [template-typescript-node-package](https://github.com/JoshuaKGoldberg/template-typescript-node-package).
+> 💙 This package is based on [@JoshuaKGoldberg](https://github.com/JoshuaKGoldberg)'s [create-typescript-app](https://github.com/JoshuaKGoldberg/create-typescript-app).

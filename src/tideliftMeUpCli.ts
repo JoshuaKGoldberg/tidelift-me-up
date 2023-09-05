@@ -43,7 +43,7 @@ export async function tideliftMeUpCli(args: string[]) {
 	const username = usernameRaw ?? (await getNpmWhoami());
 	if (!username) {
 		throw new Error(
-			"Either log in to npm or provide a username with --username."
+			"Either log in to npm or provide a username with --username.",
 		);
 	}
 

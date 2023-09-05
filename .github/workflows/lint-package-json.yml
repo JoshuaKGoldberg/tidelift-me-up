@@ -1,12 +1,12 @@
 jobs:
-  lint_packages:
+  lint_package_json:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/prepare
-      - run: pnpm lint:packages
+      - run: pnpm lint:package-json
 
-name: Lint Packages
+name: Lint Package JSON
 
 on:
   pull_request: ~

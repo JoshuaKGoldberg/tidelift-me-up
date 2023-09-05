@@ -20,4 +20,4 @@ export const createFakePackageData = (overrides?: Partial<PackageData>) =>
 		scope: "",
 		version: "",
 		...overrides,
-	} satisfies PackageData);
+	}) satisfies PackageData;

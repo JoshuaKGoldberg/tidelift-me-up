@@ -17,7 +17,7 @@ describe("createUserPackagesFilter", () => {
 			createFakePackageData({
 				author: { name: "", username },
 				date: new Date(Date.now() - 20_000).toString(),
-			})
+			}),
 		);
 
 		expect(actual).toBe(false);
@@ -34,7 +34,7 @@ describe("createUserPackagesFilter", () => {
 			createFakePackageData({
 				author: { name: "", username },
 				date: new Date(Date.now() - 10_000).toString(),
-			})
+			}),
 		);
 
 		expect(actual).toBe(true);
@@ -50,7 +50,7 @@ describe("createUserPackagesFilter", () => {
 		const actual = filter(
 			createFakePackageData({
 				author: { name: "", username: "other" },
-			})
+			}),
 		);
 
 		expect(actual).toBe(false);
@@ -66,7 +66,7 @@ describe("createUserPackagesFilter", () => {
 		const actual = filter(
 			createFakePackageData({
 				author: { name: "", username },
-			})
+			}),
 		);
 
 		expect(actual).toBe(true);
@@ -82,7 +82,7 @@ describe("createUserPackagesFilter", () => {
 		const actual = filter(
 			createFakePackageData({
 				maintainers: [{ email: "", username: "other" }],
-			})
+			}),
 		);
 
 		expect(actual).toBe(false);
@@ -98,7 +98,7 @@ describe("createUserPackagesFilter", () => {
 		const actual = filter(
 			createFakePackageData({
 				maintainers: [{ email: "", username }],
-			})
+			}),
 		);
 
 		expect(actual).toBe(true);
@@ -114,7 +114,7 @@ describe("createUserPackagesFilter", () => {
 		const actual = filter(
 			createFakePackageData({
 				publisher: { email: "", username: "other" },
-			})
+			}),
 		);
 
 		expect(actual).toBe(false);
@@ -130,7 +130,7 @@ describe("createUserPackagesFilter", () => {
 		const actual = filter(
 			createFakePackageData({
 				publisher: { email: "", username },
-			})
+			}),
 		);
 
 		expect(actual).toBe(true);
