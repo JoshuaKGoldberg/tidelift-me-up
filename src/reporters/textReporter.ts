@@ -12,8 +12,8 @@ export function textReporter(estimatedPackages: EstimatedPackage[]) {
 		if (estimatedPackage.lifted) {
 			console.log(
 				chalk.gray(
-					`✅ ${estimatedPackage.name} is already lifted for ${currency}/mo.`
-				)
+					`✅ ${estimatedPackage.name} is already lifted for ${currency}/mo.`,
+				),
 			);
 		} else {
 			console.log(
@@ -23,7 +23,7 @@ export function textReporter(estimatedPackages: EstimatedPackage[]) {
 					` is not yet lifted, but is estimated for `,
 					chalk.cyanBright(`${currency}/mo`),
 					`.`,
-				].join("")
+				].join(""),
 			);
 		}
 	}

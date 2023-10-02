@@ -18,7 +18,7 @@ describe("textReporter", () => {
 		]);
 
 		expect(logger).toHaveBeenCalledWith(
-			chalk.gray(`✅ abc123 is already lifted for $12.34/mo.`)
+			chalk.gray(`✅ abc123 is already lifted for $12.34/mo.`),
 		);
 	});
 
@@ -41,7 +41,7 @@ describe("textReporter", () => {
 				` is not yet lifted, but is estimated for `,
 				chalk.cyanBright(`$12.34/mo`),
 				`.`,
-			].join("")
+			].join(""),
 		);
 	});
 });

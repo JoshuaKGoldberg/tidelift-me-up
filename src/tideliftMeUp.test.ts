@@ -30,7 +30,7 @@ describe("tideliftMeUp", () => {
 		mockGetNpmWhoami.mockResolvedValue(undefined);
 
 		await expect(() => tideliftMeUp()).rejects.toEqual(
-			new Error("Either log in to npm or provide a `username`.")
+			new Error("Either log in to npm or provide a `username`."),
 		);
 	});
 

@@ -21,14 +21,14 @@ export async function tideliftMeUp({
 	}
 
 	const userPackages = (await getNpmUserPackages(username)).filter(
-		createUserPackagesFilter({ ownership, since: new Date(since), username })
+		createUserPackagesFilter({ ownership, since: new Date(since), username }),
 	);
 	const userPackagesByName = Object.fromEntries(
-		userPackages.map((userPackage) => [userPackage.name, userPackage])
+		userPackages.map((userPackage) => [userPackage.name, userPackage]),
 	);
 
 	const packageEstimates = await getPackageEstimates(
-		userPackages.map((userPackage) => userPackage.name)
+		userPackages.map((userPackage) => userPackage.name),
 	);
 
 	return packageEstimates.map((packageEstimate) => ({

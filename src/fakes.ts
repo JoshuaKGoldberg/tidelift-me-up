@@ -1,4 +1,4 @@
-import { PackageData } from "npm-user-packages";
+import { PackageData } from "./getNpmUserPackages.js";
 
 export const createFakePackageData = (overrides?: Partial<PackageData>) =>
 	({
@@ -20,4 +20,4 @@ export const createFakePackageData = (overrides?: Partial<PackageData>) =>
 		scope: "",
 		version: "",
 		...overrides,
-	} satisfies PackageData);
+	}) satisfies PackageData;

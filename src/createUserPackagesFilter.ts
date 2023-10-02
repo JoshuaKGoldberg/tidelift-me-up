@@ -31,7 +31,7 @@ export function createUserPackagesFilter({
 
 					case "maintainer":
 						return userPackage.maintainers.some(
-							(maintainer) => maintainer.username === username
+							(maintainer) => maintainer.username === username,
 						);
 
 					case "publisher":

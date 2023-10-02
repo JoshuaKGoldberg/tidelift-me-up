@@ -19,7 +19,7 @@ export async function getPackageEstimates(packageNames: string[]) {
 				"content-type": "application/json",
 			},
 			method: "POST",
-		}
+		},
 	);
 	const json = (await response.json()) as PackageEstimateData[];
 

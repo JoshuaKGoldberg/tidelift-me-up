@@ -24,9 +24,9 @@ describe("tideliftMeUpCli", () => {
 
 		const reporter = "invalid";
 		await expect(() =>
-			tideliftMeUpCli(["--reporter", reporter])
+			tideliftMeUpCli(["--reporter", reporter]),
 		).rejects.toEqual(
-			new Error(`--reporter must be "json" or "text", not ${reporter}.`)
+			new Error(`--reporter must be "json" or "text", not ${reporter}.`),
 		);
 	});
 
@@ -34,7 +34,7 @@ describe("tideliftMeUpCli", () => {
 		mockGetNpmWhoami.mockResolvedValue(undefined);
 
 		await expect(() => tideliftMeUpCli([])).rejects.toEqual(
-			new Error("Either log in to npm or provide a username with --username.")
+			new Error("Either log in to npm or provide a username with --username."),
 		);
 	});
 
