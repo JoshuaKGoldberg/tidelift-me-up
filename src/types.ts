@@ -1,4 +1,4 @@
-import { PackageData } from "npm-user-packages";
+import { PackageData } from "./getNpmUserPackages.js";
 
 export interface EstimatedPackage {
 	data: PackageData;

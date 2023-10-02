@@ -1,4 +1,4 @@
-<h1 align="center">tidelift-me-up</h1>
+<h1 align="center">Tidelift Me Up</h1>
 
 <p align="center">Finds your npm packages that are eligible for Tidelift funding. 💸</p>
 
@@ -6,7 +6,7 @@
 	<a href="#contributors" target="_blank">
 <!-- prettier-ignore-start -->
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-<img alt="All Contributors: 2" src="https://img.shields.io/badge/all_contributors-2-21bb42.svg" />
+<img alt="All Contributors: 2 👪" src="https://img.shields.io/badge/all_contributors-2_👪-21bb42.svg" />
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <!-- prettier-ignore-end -->
 	</a>
@@ -24,6 +24,7 @@
 	</a>
 	<img alt="Style: Prettier" src="https://img.shields.io/badge/style-prettier-21bb42.svg" />
 	<img alt="TypeScript: Strict" src="https://img.shields.io/badge/typescript-strict-21bb42.svg" />
+	<img alt="npm package version" src="https://img.shields.io/npm/v/tidelift-me-up?color=21bb42" />
 </p>
 
 ## Usage
@@ -64,7 +65,7 @@ npx tidelift-me-up --ownership author --ownership publisher --reporter json --si
 
 This package also exports a `tideliftMeUp` function you can call to receive an array of results:
 
-```js
+```ts
 import { tideliftMeUp } from "tidelift-me-up";
 
 await tideliftMeUp();
@@ -81,7 +82,7 @@ await tideliftMeUp();
 
 It takes in the same options as the CLI, except for `reporter`:
 
-```js
+```ts
 import { tideliftMeUp } from "tidelift-me-up";
 
 await tideliftMeUp({

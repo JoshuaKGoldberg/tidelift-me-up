@@ -34,6 +34,6 @@ describe("getNpmWhoami", () => {
 
 		const result = await getNpmWhoami();
 
-		expect(result).toBe(undefined);
+		expect(result).toBeUndefined();
 	});
 });

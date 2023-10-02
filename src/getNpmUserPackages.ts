@@ -3,7 +3,7 @@ This is a re-implementation of the `npm-user-packages` package API for:
 * https://github.com/JoshuaKGoldberg/tidelift-me-up/issues/26
 * https://github.com/kevva/npm-user-packages/issues/1
 
-If you still see this in August 2023 or later, it means that issue is stale
+If you still see this in November 2023 or later, it means that issue is stale
 (or you need to pull the latest tidelift-me-up code/version).
 In which case I (Josh) will want to publish my own get-npm-user-packages...
 */
