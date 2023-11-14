@@ -27,6 +27,13 @@
 	<img alt="npm package version" src="https://img.shields.io/npm/v/tidelift-me-up?color=21bb42" />
 </p>
 
+## What is Tidelift?
+
+Tidelift is a platform that offers commercial support and maintenance for open-source software, including TypeScript. It works by providing a subscription-based service for companies and individual developers who use open-source projects. Tidelift partners with open-source maintainers to ensure that the software they provide is well-maintained, secure, and professionally supported.
+
+- Real life Example : 
+	A Company that develops web applications using TypeScript and relies on various open-source libraries to enhance their development process. Instead of having to manage the maintenance and security of these open-source dependencies internally, the company subscribes to Tidelift. This subscription ensures that the open-source libraries they use are continuously maintained, updated, and supported by a team of professionals. This support allows the company to focus on their core development work, knowing that their open-source dependencies 	are in good hands and will be continuously improved and secured.  
+
 ## Usage
 
 Run this with `npx`:
