@@ -92,7 +92,3 @@ export async function getNpmUserPackages(maintainer: string) {
 		}
 	}
 }
-
-/*
-https://registry.npmjs.com/-/v1/search?&text=maintainer:joshuakgoldberg
-*/

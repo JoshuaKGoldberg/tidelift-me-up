@@ -12,7 +12,7 @@ describe("getNpmUserPackages", () => {
 
 		mockFetch.mockResolvedValue({
 			json: () => ({
-				results: packageNames.map((packageName) => ({ package: packageName })),
+				objects: packageNames.map((packageName) => ({ package: packageName })),
 				total: 2,
 			}),
 		});
@@ -33,7 +33,7 @@ describe("getNpmUserPackages", () => {
 			calls += 1;
 			return {
 				json: () => ({
-					results: packageNames.slice(start, end).map((responseName) => ({
+					objects: packageNames.slice(start, end).map((responseName) => ({
 						package: responseName,
 					})),
 					total,

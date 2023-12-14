@@ -40,14 +40,12 @@
 	},
 	"dependencies": {
 		"chalk": "^5.3.0",
-		"npm-registry-fetch": "^16.1.0",
 		"npm-whoami": "^1.1.4"
 	},
 	"devDependencies": {
 		"@release-it/conventional-changelog": "^8.0.0",
 		"@types/eslint": "^8.44.3",
 		"@types/node": "^20.3.1",
-		"@types/npm-registry-fetch": "^8.0.7",
 		"@types/npm-whoami": "^1.1.0",
 		"@typescript-eslint/eslint-plugin": "^6.7.3",
 		"@typescript-eslint/parser": "^6.7.3",
