@@ -1,4 +1,4 @@
-import { describe, expect, it, test } from "vitest";
+import { describe, expect, test } from "vitest";
 
 import { parseOwnership } from "./parseOwnership.js";
 
