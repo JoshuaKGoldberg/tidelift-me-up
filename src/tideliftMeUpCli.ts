@@ -2,6 +2,7 @@ import { parseArgs } from "node:util";
 
 import { assertValidOwnership } from "./assertValidOwnership.js";
 import { getNpmWhoami } from "./getNpmWhoami.js";
+import { parseOwnership } from "./parseOwnership.js";
 import { jsonReporter } from "./reporters/jsonReporter.js";
 import { textReporter } from "./reporters/textReporter.js";
 import { tideliftMeUp } from "./tideliftMeUp.js";
@@ -26,12 +27,9 @@ export async function tideliftMeUpCli(args: string[]) {
 		tokens: true,
 	});
 
-	const {
-		ownership,
-		reporter: reporterRaw,
-		since,
-		username: usernameRaw,
-	} = values;
+	const { reporter: reporterRaw, since, username: usernameRaw } = values;
+
+	const ownership = parseOwnership(values.ownership);
 
 	assertValidOwnership(ownership);
 
