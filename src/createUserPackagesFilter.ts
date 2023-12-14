@@ -26,7 +26,6 @@ export function createUserPackagesFilter({
 			!ownership.some((ownershipForm) => {
 				switch (ownershipForm) {
 					case "author":
-						// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 						return userPackage.author?.username === username;
 
 					case "maintainer":
