@@ -20,15 +20,17 @@ export async function tideliftMeUp({
 		throw new Error("Either log in to npm or provide a `username`.");
 	}
 
-	const userPackages = (await getNpmUserPackages(username)).filter(
+	const allUserPackages = await getNpmUserPackages(username);
+
+	const relevantUserPackages = allUserPackages.filter(
 		createUserPackagesFilter({ ownership, since: new Date(since), username }),
 	);
 	const userPackagesByName = Object.fromEntries(
-		userPackages.map((userPackage) => [userPackage.name, userPackage]),
+		relevantUserPackages.map((userPackage) => [userPackage.name, userPackage]),
 	);
 
 	const packageEstimates = await getPackageEstimates(
-		userPackages.map((userPackage) => userPackage.name),
+		relevantUserPackages.map((userPackage) => userPackage.name),
 	);
 
 	return packageEstimates.map((packageEstimate) => ({
