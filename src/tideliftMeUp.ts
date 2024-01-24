@@ -1,5 +1,6 @@
+import { npmUsernameToPackages } from "npm-username-to-packages";
+
 import { createUserPackagesFilter } from "./createUserPackagesFilter.js";
-import { getNpmUserPackages } from "./getNpmUserPackages.js";
 import { getNpmWhoami } from "./getNpmWhoami.js";
 import { getPackageEstimates } from "./getPackageEstimates.js";
 import { EstimatedPackage, PackageOwnership } from "./types.js";
@@ -20,7 +21,7 @@ export async function tideliftMeUp({
 		throw new Error("Either log in to npm or provide a `username`.");
 	}
 
-	const allUserPackages = await getNpmUserPackages(username);
+	const allUserPackages = await npmUsernameToPackages(username);
 
 	const relevantUserPackages = allUserPackages.filter(
 		createUserPackagesFilter({ ownership, since: new Date(since), username }),

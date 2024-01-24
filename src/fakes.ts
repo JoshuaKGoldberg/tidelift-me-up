@@ -1,4 +1,4 @@
-import { PackageData } from "./getNpmUserPackages.js";
+import { PackageData } from "npm-username-to-packages";
 
 export const createFakePackageData = (overrides?: Partial<PackageData>) =>
 	({
