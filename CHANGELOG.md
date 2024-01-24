@@ -1,3 +1,9 @@
+# [0.3.0](https://github.com/JoshuaKGoldberg/tidelift-me-up/compare/0.2.0...0.3.0) (2024-01-24)
+
+### Features
+
+- added rudimentary -h/--help to the CLI ([#229](https://github.com/JoshuaKGoldberg/tidelift-me-up/issues/229)) ([e946747](https://github.com/JoshuaKGoldberg/tidelift-me-up/commit/e9467473c4a48a5ab8f2f9e641e2837fd97fc934)), closes [#217](https://github.com/JoshuaKGoldberg/tidelift-me-up/issues/217)
+
 # [0.2.0](https://github.com/JoshuaKGoldberg/tidelift-me-up/compare/0.1.7...0.2.0) (2023-12-14)
 
 ### Bug Fixes
