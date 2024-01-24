@@ -35,6 +35,11 @@ export const argsOptions = {
 			"(default: 2 years ago) A date that packages need to have been updated since to be considered.",
 		type: "string",
 	},
+	status: {
+		description:
+			"(default: 'all') If provided, a filter on package lifting status: 'all', 'available', or 'lifted'.",
+		type: "string",
+	},
 	username: {
 		description:
 			"(default: result of npm whoami) The npm username to search for packages owned by.",

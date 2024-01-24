@@ -65,6 +65,7 @@ npx tidelift-me-up
 - `--reporter` _(default: `"text"`)_: Either `"json"` to output a raw JSON string, or `"text"` for human-readable output
 - `--since` _(default: 2 years ago)_: A date that packages need to have been updated since to be considered
   - This will be provided as a string to the `Date` constructor
+- `--status` _(default: `'all'`)_: If provided, a filter on package lifting status: `'all'`, `"available"`, or `"lifted"`
 - `--username` _(default: result of `npm whoami`)_: The npm username to search for packages owned by
   - The search is done by a network call to [https://registry.npmjs.org](https://https://registry.npmjs.org) (documented at [github.com/npm/registry](https://github.com/npm/registry))
 

@@ -7,7 +7,7 @@ const mockFetch = vi.fn();
 vi.stubGlobal("fetch", mockFetch);
 
 describe("getPackageEstimates", () => {
-	it("maps estimates data", async () => {
+	it("maps estimated data", async () => {
 		mockFetch.mockResolvedValue({
 			json: () => [
 				{
