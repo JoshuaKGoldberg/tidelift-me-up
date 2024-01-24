@@ -65,7 +65,7 @@ npx tidelift-me-up
 - `--since` _(default: 2 years ago)_: A date that packages need to have been updated since to be considered
   - This will be provided as a string to the `Date` constructor
 - `--username` _(default: result of `npm whoami`)_: The npm username to search for packages maintained by
-  - The search is done by a network call to [https://registry.npmjs.org](https://https://registry.npmjs.org) (documented at [](https://github.com/npm/registry))
+  - The search is done by a network call to [https://registry.npmjs.org](https://https://registry.npmjs.org) (documented at [github.com/npm/registry](https://github.com/npm/registry))
 
 ```shell
 npx tidelift-me-up --ownership author --ownership publisher --reporter json --since 2020 --username your-username
