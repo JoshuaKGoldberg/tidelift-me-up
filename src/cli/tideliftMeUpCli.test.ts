@@ -46,6 +46,17 @@ describe("tideliftMeUpCli", () => {
 		);
 	});
 
+	it("throws an error when --status is provided and not all, available, or lifted", async () => {
+		mockGetNpmWhoami.mockResolvedValue(undefined);
+
+		const reporter = "invalid";
+		await expect(() => tideliftMeUpCli(["--status", reporter])).rejects.toEqual(
+			new Error(
+				`--status must be "all", "available", or "lifted", not ${reporter}.`,
+			),
+		);
+	});
+
 	it("throws an error when --username isn't provided and getNpmWhoami returns undefined", async () => {
 		mockGetNpmWhoami.mockResolvedValue(undefined);
 
