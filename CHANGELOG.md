@@ -1,3 +1,9 @@
+# [0.4.0](https://github.com/JoshuaKGoldberg/tidelift-me-up/compare/0.3.0...0.4.0) (2024-01-24)
+
+### Features
+
+- added a --status filter ([#230](https://github.com/JoshuaKGoldberg/tidelift-me-up/issues/230)) ([80a74b1](https://github.com/JoshuaKGoldberg/tidelift-me-up/commit/80a74b1dda49a21cff676913f818476543d0f49a)), closes [#218](https://github.com/JoshuaKGoldberg/tidelift-me-up/issues/218)
+
 # [0.3.0](https://github.com/JoshuaKGoldberg/tidelift-me-up/compare/0.2.0...0.3.0) (2024-01-24)
 
 ### Features
