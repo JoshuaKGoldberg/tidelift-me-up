@@ -4,7 +4,7 @@ import { tideliftMeUpCli } from "./tideliftMeUpCli.js";
 
 const mockGetNpmWhoami = vi.fn();
 
-vi.mock("./getNpmWhoami.js", () => ({
+vi.mock("../getNpmWhoami.js", () => ({
 	get getNpmWhoami() {
 		return mockGetNpmWhoami;
 	},
@@ -12,13 +12,29 @@ vi.mock("./getNpmWhoami.js", () => ({
 
 const mockTideliftMeUp = vi.fn();
 
-vi.mock("./tideliftMeUp.js", () => ({
+vi.mock("../tideliftMeUp.js", () => ({
 	get tideliftMeUp() {
 		return mockTideliftMeUp;
 	},
 }));
 
+const mockLogHelp = vi.fn();
+
+vi.mock("./logHelp.js", () => ({
+	get logHelp() {
+		return mockLogHelp;
+	},
+}));
+
 describe("tideliftMeUpCli", () => {
+	it("logs help when args include --help", async () => {
+		await tideliftMeUpCli(["--help"]);
+
+		expect(mockLogHelp).toHaveBeenCalled();
+		expect(mockGetNpmWhoami).not.toHaveBeenCalled();
+		expect(mockTideliftMeUp).not.toHaveBeenCalled();
+	});
+
 	it("throws an error when --reporter is provided and not json or text", async () => {
 		mockGetNpmWhoami.mockResolvedValue(undefined);
 
@@ -45,6 +61,7 @@ describe("tideliftMeUpCli", () => {
 
 		await tideliftMeUpCli(["--username", username]);
 
+		expect(mockLogHelp).not.toHaveBeenCalled();
 		expect(mockGetNpmWhoami).not.toHaveBeenCalled();
 		expect(mockTideliftMeUp).toHaveBeenCalledWith({
 			username,
@@ -54,6 +71,7 @@ describe("tideliftMeUpCli", () => {
 	it("logs packages for a username when --username is not provided and the user is logged in", async () => {
 		const username = "abc123";
 
+		expect(mockLogHelp).not.toHaveBeenCalled();
 		mockGetNpmWhoami.mockResolvedValue(username);
 		mockTideliftMeUp.mockResolvedValue([]);
 

@@ -1,11 +1,13 @@
 import { parseArgs } from "node:util";
 
-import { assertValidOwnership } from "./assertValidOwnership.js";
-import { getNpmWhoami } from "./getNpmWhoami.js";
-import { parseOwnership } from "./parseOwnership.js";
-import { jsonReporter } from "./reporters/jsonReporter.js";
-import { textReporter } from "./reporters/textReporter.js";
-import { tideliftMeUp } from "./tideliftMeUp.js";
+import { assertValidOwnership } from "../assertValidOwnership.js";
+import { getNpmWhoami } from "../getNpmWhoami.js";
+import { parseOwnership } from "../parseOwnership.js";
+import { jsonReporter } from "../reporters/jsonReporter.js";
+import { textReporter } from "../reporters/textReporter.js";
+import { tideliftMeUp } from "../tideliftMeUp.js";
+import { argsOptions } from "./argsOptions.js";
+import { logHelp } from "./logHelp.js";
 
 const reporters = {
 	json: jsonReporter,
@@ -15,17 +17,14 @@ const reporters = {
 export async function tideliftMeUpCli(args: string[]) {
 	const { values } = parseArgs({
 		args,
-		options: {
-			ownership: {
-				multiple: true,
-				type: "string",
-			},
-			reporter: { type: "string" },
-			since: { type: "string" },
-			username: { type: "string" },
-		},
+		options: argsOptions,
 		tokens: true,
 	});
+
+	if (values.help) {
+		logHelp();
+		return;
+	}
 
 	const { reporter: reporterRaw, since, username: usernameRaw } = values;
 
