@@ -60,11 +60,12 @@ npx tidelift-me-up
 
 ### Options
 
+- `-h`/`--help`: Print these options to the terminal
 - `--ownership` _(default: `["author", "publisher"]`)_: If provided, any filters user packages must match one of based on username: `"author"`, `"maintainer"`, and/or `"publisher"`
 - `--reporter` _(default: `"text"`)_: Either `"json"` to output a raw JSON string, or `"text"` for human-readable output
 - `--since` _(default: 2 years ago)_: A date that packages need to have been updated since to be considered
   - This will be provided as a string to the `Date` constructor
-- `--username` _(default: result of `npm whoami`)_: The npm username to search for packages maintained by
+- `--username` _(default: result of `npm whoami`)_: The npm username to search for packages owned by
   - The search is done by a network call to [https://registry.npmjs.org](https://https://registry.npmjs.org) (documented at [github.com/npm/registry](https://github.com/npm/registry))
 
 ```shell
