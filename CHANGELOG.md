@@ -1,3 +1,9 @@
+## [0.4.1](https://github.com/JoshuaKGoldberg/tidelift-me-up/compare/0.4.0...0.4.1) (2024-02-21)
+
+### Bug Fixes
+
+- don't include monetary estimates for lifted packages ([#253](https://github.com/JoshuaKGoldberg/tidelift-me-up/issues/253)) ([89a276c](https://github.com/JoshuaKGoldberg/tidelift-me-up/commit/89a276cf4b3e2a48da15c9ae1d296182e8751831)), closes [#252](https://github.com/JoshuaKGoldberg/tidelift-me-up/issues/252)
+
 # [0.4.0](https://github.com/JoshuaKGoldberg/tidelift-me-up/compare/0.3.0...0.4.0) (2024-01-24)
 
 ### Features
