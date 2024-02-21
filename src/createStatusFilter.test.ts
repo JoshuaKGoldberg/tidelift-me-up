@@ -15,7 +15,7 @@ describe("createStatusFilter", () => {
 		it(`returns ${lifted} when lifted is true`, () => {
 			const filter = createStatusFilter(status);
 
-			const actual = filter({ estimatedMoney: 0, lifted: true, name: "" });
+			const actual = filter({ lifted: true, name: "" });
 
 			expect(actual).toBe(lifted);
 		});
@@ -23,7 +23,7 @@ describe("createStatusFilter", () => {
 		it(`returns ${notLifted} when lifted is false`, () => {
 			const filter = createStatusFilter(status);
 
-			const actual = filter({ estimatedMoney: 0, lifted: false, name: "" });
+			const actual = filter({ estimatedMoney: 10, lifted: false, name: "" });
 
 			expect(actual).toBe(notLifted);
 		});

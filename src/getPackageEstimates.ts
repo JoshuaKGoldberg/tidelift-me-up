@@ -5,11 +5,20 @@ interface PackageEstimateData {
 	platform: "npm";
 }
 
-export interface PackageEstimate {
-	estimatedMoney: number;
-	lifted: boolean;
+export interface PackageEstimateBase {
 	name: string;
 }
+
+export interface PackageEstimateLifted extends PackageEstimateBase {
+	lifted: true;
+}
+
+export interface PackageEstimateNotLifted extends PackageEstimateBase {
+	estimatedMoney: number;
+	lifted: false;
+}
+
+export type PackageEstimate = PackageEstimateLifted | PackageEstimateNotLifted;
 
 export async function getPackageEstimates(
 	packageNames: string[],
