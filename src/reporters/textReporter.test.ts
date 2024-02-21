@@ -11,14 +11,13 @@ describe("textReporter", () => {
 		textReporter([
 			{
 				data: createFakePackageData(),
-				estimatedMoney: 12.34,
 				lifted: true,
 				name: "abc123",
 			},
 		]);
 
 		expect(logger).toHaveBeenCalledWith(
-			chalk.gray(`✅ abc123 is already lifted for $12.34/mo.`),
+			chalk.gray(`✅ abc123 is already lifted.`),
 		);
 	});
 

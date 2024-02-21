@@ -1,11 +1,22 @@
 import { PackageData } from "npm-username-to-packages";
 
-export interface EstimatedPackage {
+export interface EstimatedPackageBase {
 	data: PackageData;
-	estimatedMoney: number;
-	lifted: boolean;
 	name: string;
 }
+
+export interface EstimatedPackageLifted extends EstimatedPackageBase {
+	lifted: true;
+}
+
+export interface EstimatedPackageNotLifted extends EstimatedPackageBase {
+	estimatedMoney: number;
+	lifted: false;
+}
+
+export type EstimatedPackage =
+	| EstimatedPackageLifted
+	| EstimatedPackageNotLifted;
 
 export type PackageOwnership = "author" | "maintainer" | "publisher";
 
