@@ -27,7 +27,7 @@ devDependencies:
     version: 20.3.1
   '@types/npm-whoami':
     specifier: ^1.1.0
-    version: 1.1.0
+    version: 1.1.2
   '@typescript-eslint/eslint-plugin':
     specifier: ^7.0.0
     version: 7.0.1(@typescript-eslint/parser@7.0.1)(eslint@8.50.0)(typescript@5.2.2)
@@ -1457,8 +1457,8 @@ packages:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
     dev: true
 
-  /@types/npm-whoami@1.1.0:
-    resolution: {integrity: sha512-5Ww5bIJoCIQ4Zqy02mpfHNdbtjRu0I8sSYKdgwPaWuu0eOtBfseg22wUFLIjD2uTrR0p5xydHWzSEDdevR6YMQ==}
+  /@types/npm-whoami@1.1.2:
+    resolution: {integrity: sha512-VDsGWTBHn0lR86lnoZk/O6a0d01Vbw+aEXmwrw72xJPOvbMAiOIKYDjQqqAH/RICARGGGhW3gIOUeR+X2Vs4vQ==}
     dev: true
 
   /@types/picomatch@2.3.3:
