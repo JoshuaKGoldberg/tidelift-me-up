@@ -1,6 +1,6 @@
 <h1 align="center">Tidelift Me Up</h1>
 
-<p align="center">Finds your npm packages that are eligible for Tidelift funding. 💸</p>
+<p align="center">CLI that checks if your npm packages are eligible for Tidelift funding. 💸</p>
 
 <p align="center">
 	<a href="#contributors" target="_blank">
