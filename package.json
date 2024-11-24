@@ -44,7 +44,7 @@
 		"npm-whoami": "^1.1.4"
 	},
 	"devDependencies": {
-		"@release-it/conventional-changelog": "^8.0.0",
+		"@release-it/conventional-changelog": "^9.0.0",
 		"@types/eslint": "^8.44.3",
 		"@types/node": "^20.3.1",
 		"@types/npm-whoami": "^1.1.0",
