@@ -46,7 +46,7 @@
 	"devDependencies": {
 		"@release-it/conventional-changelog": "^9.0.0",
 		"@types/eslint": "^9.0.0",
-		"@types/node": "^20.3.1",
+		"@types/node": "^22.0.0",
 		"@types/npm-whoami": "^1.1.0",
 		"@typescript-eslint/eslint-plugin": "^8.0.0",
 		"@typescript-eslint/parser": "^7.0.0",
