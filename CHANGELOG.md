@@ -1,3 +1,9 @@
+## [0.4.2](https://github.com/JoshuaKGoldberg/tidelift-me-up/compare/0.4.1...0.4.2) (2024-11-28)
+
+### Bug Fixes
+
+- bump npm-username-to-packages to ^0.1.3 ([648eac6](https://github.com/JoshuaKGoldberg/tidelift-me-up/commit/648eac6360ee2f1ce55a41a63da256317d2cfa85))
+
 ## [0.4.1](https://github.com/JoshuaKGoldberg/tidelift-me-up/compare/0.4.0...0.4.1) (2024-02-21)
 
 ### Bug Fixes
