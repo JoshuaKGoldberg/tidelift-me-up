@@ -12,8 +12,8 @@ importers:
         specifier: ^5.3.0
         version: 5.3.0
       npm-username-to-packages:
-        specifier: ^0.1.2
-        version: 0.1.2
+        specifier: ^0.1.3
+        version: 0.1.3
       npm-whoami:
         specifier: ^1.1.4
         version: 1.1.4
@@ -2770,8 +2770,8 @@ packages:
     resolution: {integrity: sha512-ppwTtiJZq0O/ai0z7yfudtBpWIoxM8yE6nHi1X47eFR2EWORqfbu6CnPlNsjeN683eT0qG6H/Pyf9fCcvjnnnQ==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
 
-  npm-username-to-packages@0.1.2:
-    resolution: {integrity: sha512-tgRZiaZo2ieGKo6VDD6yZtZNKYQjs+6gJew8F/Lke0A3V7dvSEViAsuXM/U3XOsmf+uFI/86x/IT9UL8KxvTdg==}
+  npm-username-to-packages@0.1.3:
+    resolution: {integrity: sha512-+edPj9FpXjcBR+cUQ6+0e9sZQvlkyNAIPAExVyYLE5CUikhmutV7fVtVc56h/NHKkgsliaTp3nq2bcOMCDZi8g==}
     engines: {node: '>=18'}
 
   npm-whoami@1.1.4:
@@ -6464,7 +6464,7 @@ snapshots:
     dependencies:
       path-key: 4.0.0
 
-  npm-username-to-packages@0.1.2: {}
+  npm-username-to-packages@0.1.3: {}
 
   npm-whoami@1.1.4:
     dependencies:
