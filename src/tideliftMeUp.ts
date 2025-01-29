@@ -26,6 +26,10 @@ export async function tideliftMeUp({
 
 	const allUserPackages = await npmUsernameToPackages(username);
 
+	if (!allUserPackages || allUserPackages.length === 0) {
+		throw new Error(`No packages found for npm username: ${username}.`);
+	}
+
 	const relevantUserPackages = allUserPackages.filter(
 		createUserPackagesFilter({ ownership, since: new Date(since), username }),
 	);
