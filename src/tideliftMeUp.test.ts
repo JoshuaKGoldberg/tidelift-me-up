@@ -34,9 +34,43 @@ describe("tideliftMeUp", () => {
 		);
 	});
 
-	it("calls npmUserPackages with the npm name when the user is logged in", async () => {
+	it("throws an error when an invalid --username is provided", async () => {
+		const username = "#JI*#@%OJSL";
+
+		mockNpmUsernameToPackages.mockResolvedValue([]);
+		mockGetNpmWhoami.mockRejectedValue(new Error("Should not be called."));
+
+		await expect(() => tideliftMeUp({ username })).rejects.toThrowError(
+			`No packages found for npm username: ${username}.`,
+		);
+	});
+
+	it("throws an error when user is logged in but has no packages", async () => {
 		const username = "abc123";
 
+		mockNpmUsernameToPackages.mockResolvedValue([]);
+		mockGetNpmWhoami.mockResolvedValue(username);
+
+		await expect(() => tideliftMeUp()).rejects.toThrowError(
+			`No packages found for npm username: ${username}.`,
+		);
+	});
+
+	it("throws an error when valid --username is provided and has no packages", async () => {
+		const username = "abc123";
+
+		mockNpmUsernameToPackages.mockResolvedValue([]);
+		mockGetNpmWhoami.mockRejectedValue(new Error("Should not be called."));
+
+		await expect(() => tideliftMeUp({ username })).rejects.toThrowError(
+			`No packages found for npm username: ${username}.`,
+		);
+	});
+
+	it("calls npmUserPackages with the npm name when the user is logged in and user has packages", async () => {
+		const username = "abc123";
+
+		mockNpmUsernameToPackages.mockResolvedValue([createFakePackageData()]);
 		mockGetNpmWhoami.mockResolvedValue(username);
 
 		await tideliftMeUp();
@@ -44,7 +78,7 @@ describe("tideliftMeUp", () => {
 		expect(mockNpmUsernameToPackages).toHaveBeenCalledWith(username);
 	});
 
-	it("calls npmUserPackages with the provided username when it exists", async () => {
+	it("calls npmUserPackages with the provided username when it exists and user has packages", async () => {
 		const username = "abc123";
 
 		mockNpmUsernameToPackages.mockResolvedValue([createFakePackageData()]);
