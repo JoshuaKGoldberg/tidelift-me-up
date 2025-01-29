@@ -67,7 +67,7 @@ describe("tideliftMeUpCli", () => {
 	});
 
 	it("logs message when an invalid --username is provided", async () => {
-		const username = "#JI*#@%OJSL";
+		const username = "#JI*#@%OjSL";
 
 		const logger = vi.spyOn(console, "log").mockImplementation(() => undefined);
 

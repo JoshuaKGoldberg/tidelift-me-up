@@ -35,7 +35,7 @@ describe("tideliftMeUp", () => {
 	});
 
 	it("throws an error when an invalid --username is provided", async () => {
-		const username = "#JI*#@%OJSL";
+		const username = "#JI*#@%OjSL";
 
 		mockNpmUsernameToPackages.mockResolvedValue([]);
 		mockGetNpmWhoami.mockRejectedValue(new Error("Should not be called."));
