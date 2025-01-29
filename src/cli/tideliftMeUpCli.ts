@@ -9,6 +9,7 @@ import { tideliftMeUp } from "../tideliftMeUp.js";
 import { PackageStatus } from "../types.js";
 import { argsOptions } from "./argsOptions.js";
 import { logHelp } from "./logHelp.js";
+import chalk from "chalk";
 
 const reporters = {
 	json: jsonReporter,
@@ -61,12 +62,16 @@ export async function tideliftMeUpCli(args: string[]) {
 		);
 	}
 
-	const packageEstimates = await tideliftMeUp({
-		ownership,
-		since,
-		status: status as PackageStatus,
-		username,
-	});
+	try {
+		const packageEstimates = await tideliftMeUp({
+			ownership,
+			since,
+			status: status as PackageStatus,
+			username,
+		});
 
-	reporters[reporter](packageEstimates);
+		reporters[reporter](packageEstimates);
+	} catch (error) {
+		console.log(chalk.red(`Could not find packages for ${username}`));
+	}
 }
