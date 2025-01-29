@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 
 import { tideliftMeUpCli } from "./tideliftMeUpCli.js";
+import chalk from "chalk";
 
 const mockGetNpmWhoami = vi.fn();
 
@@ -65,10 +66,14 @@ describe("tideliftMeUpCli", () => {
 		);
 	});
 
-	it("logs packages for a username when --username is provided", async () => {
-		const username = "abc123";
+	it("logs message when an invalid --username is provided", async () => {
+		const username = "#JI*#@%OJSL";
 
-		mockTideliftMeUp.mockResolvedValue([]);
+		const logger = vi.spyOn(console, "log").mockImplementation(() => undefined);
+
+		mockTideliftMeUp.mockImplementation(() => {
+			throw new Error(`No packages found for npm username: ${username}.`);
+		});
 
 		await tideliftMeUpCli(["--username", username]);
 
@@ -77,19 +82,56 @@ describe("tideliftMeUpCli", () => {
 		expect(mockTideliftMeUp).toHaveBeenCalledWith({
 			username,
 		});
+		expect(logger).toHaveBeenCalledWith(
+			chalk.red(`Could not find packages for ${username}`),
+		);
+
+		logger.mockRestore();
 	});
 
-	it("logs packages for a username when --username is not provided and the user is logged in", async () => {
+	it("logs message when valid --username is provided and user has no packages", async () => {
 		const username = "abc123";
 
+		const logger = vi.spyOn(console, "log").mockImplementation(() => undefined);
+
+		mockTideliftMeUp.mockImplementation(() => {
+			throw new Error(`No packages found for npm username: ${username}.`);
+		});
+
+		await tideliftMeUpCli(["--username", username]);
+
 		expect(mockLogHelp).not.toHaveBeenCalled();
-		mockGetNpmWhoami.mockResolvedValue(username);
-		mockTideliftMeUp.mockResolvedValue([]);
-
-		await tideliftMeUpCli([]);
-
+		expect(mockGetNpmWhoami).not.toHaveBeenCalled();
 		expect(mockTideliftMeUp).toHaveBeenCalledWith({
 			username,
 		});
+		expect(logger).toHaveBeenCalledWith(
+			chalk.red(`Could not find packages for ${username}`),
+		);
+
+		logger.mockRestore();
+	});
+
+	it("logs message when --username is not provided, user is logged in and user has no packages", async () => {
+		const username = "abc123";
+
+		const logger = vi.spyOn(console, "log").mockImplementation(() => undefined);
+
+		mockGetNpmWhoami.mockResolvedValue(username);
+		mockTideliftMeUp.mockImplementation(() => {
+			throw new Error(`No packages found for npm username: ${username}.`);
+		});
+
+		await tideliftMeUpCli([]);
+
+		expect(mockLogHelp).not.toHaveBeenCalled();
+		expect(mockTideliftMeUp).toHaveBeenCalledWith({
+			username,
+		});
+		expect(logger).toHaveBeenCalledWith(
+			chalk.red(`Could not find packages for ${username}`),
+		);
+
+		logger.mockRestore();
 	});
 });
