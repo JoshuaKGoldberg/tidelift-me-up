@@ -1,17 +1,17 @@
 import { ParseArgsConfig } from "node:util";
 
-export type ParseArgsOptionsConfig = NonNullable<ParseArgsConfig["options"]>;
-
-export type ParseArgsOptionConfig = ParseArgsOptionsConfig[string];
+export type DescribedParseArgsConfig = Record<
+	string,
+	DescribedParseArgsOptionConfig
+>;
 
 export interface DescribedParseArgsOptionConfig extends ParseArgsOptionConfig {
 	description: string;
 }
 
-export type DescribedParseArgsConfig = Record<
-	string,
-	DescribedParseArgsOptionConfig
->;
+export type ParseArgsOptionConfig = ParseArgsOptionsConfig[string];
+
+export type ParseArgsOptionsConfig = NonNullable<ParseArgsConfig["options"]>;
 
 export const argsOptions = {
 	help: {
