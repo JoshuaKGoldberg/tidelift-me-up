@@ -106,8 +106,8 @@ importers:
         specifier: ^17.11.0
         version: 17.11.0(typescript@5.7.3)
       sentences-per-line:
-        specifier: ^0.2.2
-        version: 0.2.2
+        specifier: ^0.3.0
+        version: 0.3.0
       should-semantic-release:
         specifier: ^0.3.0
         version: 0.3.0
@@ -3053,8 +3053,8 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
-  sentences-per-line@0.2.2:
-    resolution: {integrity: sha512-0Ti6Sz2XQ5GHkzNje3Z+AC/GbaYTMfHxJy7IR9cZCe8EdQuBdSEyuLrgkn7oKiZkf6X/OFsufsraOP3eOZsUSg==}
+  sentences-per-line@0.3.0:
+    resolution: {integrity: sha512-/cSQgaLDEmed+AIC2KAd1A5k4sy8bbWy3ObBDUE2+JmiwolTBuc87TlwlTSnBJVPa7+zfGv28J63xzznFRv5tQ==}
     engines: {node: '>=18'}
 
   shebang-command@2.0.0:
@@ -6647,7 +6647,7 @@ snapshots:
 
   semver@7.7.1: {}
 
-  sentences-per-line@0.2.2:
+  sentences-per-line@0.3.0:
     dependencies:
       markdownlint-rule-helpers: 0.28.0
 
