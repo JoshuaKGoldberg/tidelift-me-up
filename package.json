@@ -45,7 +45,7 @@
 	"devDependencies": {
 		"@eslint-community/eslint-plugin-eslint-comments": "^4.4.1",
 		"@eslint/js": "^9.20.0",
-		"@release-it/conventional-changelog": "^9.0.4",
+		"@release-it/conventional-changelog": "^10.0.0",
 		"@types/eslint-plugin-markdown": "^2.0.2",
 		"@types/node": "^20.17.19",
 		"@types/npm-whoami": "^1.1.2",
