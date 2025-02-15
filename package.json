@@ -47,7 +47,7 @@
 		"@eslint/js": "^9.20.0",
 		"@release-it/conventional-changelog": "^10.0.0",
 		"@types/eslint-plugin-markdown": "^2.0.2",
-		"@types/node": "^20.17.19",
+		"@types/node": "^22.0.0",
 		"@types/npm-whoami": "^1.1.2",
 		"@vitest/coverage-v8": "^2.1.9",
 		"@vitest/eslint-plugin": "1.1.31",
