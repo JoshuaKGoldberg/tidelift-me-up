@@ -1,9 +1,4 @@
-interface PackageEstimateData {
-	estimated_money: string;
-	lifted: boolean;
-	name: string;
-	platform: "npm";
-}
+export type PackageEstimate = PackageEstimateLifted | PackageEstimateNotLifted;
 
 export interface PackageEstimateBase {
 	name: string;
@@ -18,7 +13,12 @@ export interface PackageEstimateNotLifted extends PackageEstimateBase {
 	lifted: false;
 }
 
-export type PackageEstimate = PackageEstimateLifted | PackageEstimateNotLifted;
+interface PackageEstimateData {
+	estimated_money: string;
+	lifted: boolean;
+	name: string;
+	platform: "npm";
+}
 
 export async function getPackageEstimates(
 	packageNames: string[],

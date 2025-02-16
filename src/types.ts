@@ -1,5 +1,9 @@
 import { PackageData } from "npm-username-to-packages";
 
+export type EstimatedPackage =
+	| EstimatedPackageLifted
+	| EstimatedPackageNotLifted;
+
 export interface EstimatedPackageBase {
 	data: PackageData;
 	name: string;
@@ -13,10 +17,6 @@ export interface EstimatedPackageNotLifted extends EstimatedPackageBase {
 	estimatedMoney: number;
 	lifted: false;
 }
-
-export type EstimatedPackage =
-	| EstimatedPackageLifted
-	| EstimatedPackageNotLifted;
 
 export type PackageOwnership = "author" | "maintainer" | "publisher";
 
