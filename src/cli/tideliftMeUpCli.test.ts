@@ -161,4 +161,28 @@ describe("tideliftMeUpCli", () => {
 
 		logger.mockRestore();
 	});
+
+	it("logs error message for unexpected errors", async () => {
+		const username = "abc123";
+
+		const logger = vi.spyOn(console, "log").mockImplementation(() => undefined);
+
+		mockTideliftMeUp.mockImplementation(() => {
+			throw new Error(`Unexpected error occurred for ${username}`);
+		});
+
+		await tideliftMeUpCli(["--username", username]);
+
+		expect(mockLogHelp).not.toHaveBeenCalled();
+		expect(mockGetNpmWhoami).not.toHaveBeenCalled();
+		expect(mockTideliftMeUp).toHaveBeenCalledWith({
+			username,
+		});
+		expect(logger).toHaveBeenCalledWith(
+			chalk.red(`Error: no packages found for ${username}:`),
+			new Error(`Unexpected error occurred for ${username}`),
+		);
+
+		logger.mockRestore();
+	});
 });
