@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import { parseArgs } from "node:util";
 
 import { assertValidOwnership } from "../assertValidOwnership.js";
@@ -61,12 +62,25 @@ export async function tideliftMeUpCli(args: string[]) {
 		);
 	}
 
-	const packageEstimates = await tideliftMeUp({
-		ownership,
-		since,
-		status: status as PackageStatus,
-		username,
-	});
+	try {
+		const packageEstimates = await tideliftMeUp({
+			ownership,
+			since,
+			status: status as PackageStatus,
+			username,
+		});
 
-	reporters[reporter](packageEstimates);
+		reporters[reporter](packageEstimates);
+	} catch (error) {
+		if (
+			(error as Error).message.includes("No packages found for npm username:")
+		) {
+			console.log(chalk.red((error as Error).message));
+		} else {
+			console.log(
+				chalk.red(`Error: no packages found for ${username}:`),
+				error,
+			);
+		}
+	}
 }

@@ -1,5 +1,7 @@
+import chalk from "chalk";
 import { describe, expect, it, vi } from "vitest";
 
+import { createFakePackageData } from "../fakes.js";
 import { tideliftMeUpCli } from "./tideliftMeUpCli.js";
 
 const mockGetNpmWhoami = vi.fn();
@@ -65,10 +67,18 @@ describe("tideliftMeUpCli", () => {
 		);
 	});
 
-	it("logs packages for a username when --username is provided", async () => {
-		const username = "abc123";
+	it("logs packages when a valid --username is provided and user has packages", async () => {
+		const username = "user123";
 
-		mockTideliftMeUp.mockResolvedValue([]);
+		const logger = vi.spyOn(console, "log").mockImplementation(() => undefined);
+
+		mockTideliftMeUp.mockResolvedValue([
+			{
+				data: createFakePackageData(),
+				lifted: true,
+				name: "package1",
+			},
+		]);
 
 		await tideliftMeUpCli(["--username", username]);
 
@@ -77,19 +87,102 @@ describe("tideliftMeUpCli", () => {
 		expect(mockTideliftMeUp).toHaveBeenCalledWith({
 			username,
 		});
+
+		expect(logger).toHaveBeenCalledWith(
+			chalk.gray(`✅ package1 is already lifted.`),
+		);
 	});
 
-	it("logs packages for a username when --username is not provided and the user is logged in", async () => {
-		const username = "abc123";
+	it("logs message when an invalid --username is provided", async () => {
+		const username = "#JI*#@%OjSL";
+
+		const logger = vi.spyOn(console, "log").mockImplementation(() => undefined);
+
+		mockTideliftMeUp.mockImplementation(() => {
+			throw new Error(`No packages found for npm username: ${username}.`);
+		});
+
+		await tideliftMeUpCli(["--username", username]);
 
 		expect(mockLogHelp).not.toHaveBeenCalled();
-		mockGetNpmWhoami.mockResolvedValue(username);
-		mockTideliftMeUp.mockResolvedValue([]);
-
-		await tideliftMeUpCli([]);
-
+		expect(mockGetNpmWhoami).not.toHaveBeenCalled();
 		expect(mockTideliftMeUp).toHaveBeenCalledWith({
 			username,
 		});
+		expect(logger).toHaveBeenCalledWith(
+			chalk.red(`No packages found for npm username: ${username}.`),
+		);
+
+		logger.mockRestore();
+	});
+
+	it("logs message when valid --username is provided and user has no packages", async () => {
+		const username = "abc123";
+
+		const logger = vi.spyOn(console, "log").mockImplementation(() => undefined);
+
+		mockTideliftMeUp.mockImplementation(() => {
+			throw new Error(`No packages found for npm username: ${username}.`);
+		});
+
+		await tideliftMeUpCli(["--username", username]);
+
+		expect(mockLogHelp).not.toHaveBeenCalled();
+		expect(mockGetNpmWhoami).not.toHaveBeenCalled();
+		expect(mockTideliftMeUp).toHaveBeenCalledWith({
+			username,
+		});
+		expect(logger).toHaveBeenCalledWith(
+			chalk.red(`No packages found for npm username: ${username}.`),
+		);
+
+		logger.mockRestore();
+	});
+
+	it("logs message when --username is not provided, user is logged in and user has no packages", async () => {
+		const username = "abc123";
+
+		const logger = vi.spyOn(console, "log").mockImplementation(() => undefined);
+
+		mockGetNpmWhoami.mockResolvedValue(username);
+		mockTideliftMeUp.mockImplementation(() => {
+			throw new Error(`No packages found for npm username: ${username}.`);
+		});
+
+		await tideliftMeUpCli([]);
+
+		expect(mockLogHelp).not.toHaveBeenCalled();
+		expect(mockTideliftMeUp).toHaveBeenCalledWith({
+			username,
+		});
+		expect(logger).toHaveBeenCalledWith(
+			chalk.red(`No packages found for npm username: ${username}.`),
+		);
+
+		logger.mockRestore();
+	});
+
+	it("logs error message for unexpected errors", async () => {
+		const username = "abc123";
+
+		const logger = vi.spyOn(console, "log").mockImplementation(() => undefined);
+
+		mockTideliftMeUp.mockImplementation(() => {
+			throw new Error(`Unexpected error occurred for ${username}`);
+		});
+
+		await tideliftMeUpCli(["--username", username]);
+
+		expect(mockLogHelp).not.toHaveBeenCalled();
+		expect(mockGetNpmWhoami).not.toHaveBeenCalled();
+		expect(mockTideliftMeUp).toHaveBeenCalledWith({
+			username,
+		});
+		expect(logger).toHaveBeenCalledWith(
+			chalk.red(`Error: no packages found for ${username}:`),
+			new Error(`Unexpected error occurred for ${username}`),
+		);
+
+		logger.mockRestore();
 	});
 });
