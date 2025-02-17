@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import { parseArgs } from "node:util";
 
 import { assertValidOwnership } from "../assertValidOwnership.js";
@@ -9,7 +10,6 @@ import { tideliftMeUp } from "../tideliftMeUp.js";
 import { PackageStatus } from "../types.js";
 import { argsOptions } from "./argsOptions.js";
 import { logHelp } from "./logHelp.js";
-import chalk from "chalk";
 
 const reporters = {
 	json: jsonReporter,
@@ -72,6 +72,15 @@ export async function tideliftMeUpCli(args: string[]) {
 
 		reporters[reporter](packageEstimates);
 	} catch (error) {
-		console.log(chalk.red(`Could not find packages for ${username}`));
+		if (
+			(error as Error).message.includes("No packages found for npm username:")
+		) {
+			console.log(chalk.red((error as Error).message));
+		} else {
+			console.log(
+				chalk.red(`Error: no packages found for ${username}:`),
+				error,
+			);
+		}
 	}
 }
