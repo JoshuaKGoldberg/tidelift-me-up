@@ -26,7 +26,7 @@ export async function tideliftMeUp({
 
 	const allUserPackages = await npmUsernameToPackages(username);
 
-	if (!allUserPackages || allUserPackages.length === 0) {
+	if (!allUserPackages.length) {
 		throw new Error(`No packages found for npm username: ${username}.`);
 	}
 
