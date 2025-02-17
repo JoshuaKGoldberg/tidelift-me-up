@@ -1,7 +1,8 @@
+import chalk from "chalk";
 import { describe, expect, it, vi } from "vitest";
 
+import { createFakePackageData } from "../fakes.js";
 import { tideliftMeUpCli } from "./tideliftMeUpCli.js";
-import chalk from "chalk";
 
 const mockGetNpmWhoami = vi.fn();
 
@@ -66,6 +67,32 @@ describe("tideliftMeUpCli", () => {
 		);
 	});
 
+	it("logs packages when a valid --username is provided and user has packages", async () => {
+		const username = "user123";
+
+		const logger = vi.spyOn(console, "log").mockImplementation(() => undefined);
+
+		mockTideliftMeUp.mockResolvedValue([
+			{
+				data: createFakePackageData(),
+				lifted: true,
+				name: "package1",
+			},
+		]);
+
+		await tideliftMeUpCli(["--username", username]);
+
+		expect(mockLogHelp).not.toHaveBeenCalled();
+		expect(mockGetNpmWhoami).not.toHaveBeenCalled();
+		expect(mockTideliftMeUp).toHaveBeenCalledWith({
+			username,
+		});
+
+		expect(logger).toHaveBeenCalledWith(
+			chalk.gray(`✅ package1 is already lifted.`),
+		);
+	});
+
 	it("logs message when an invalid --username is provided", async () => {
 		const username = "#JI*#@%OjSL";
 
@@ -83,7 +110,7 @@ describe("tideliftMeUpCli", () => {
 			username,
 		});
 		expect(logger).toHaveBeenCalledWith(
-			chalk.red(`Could not find packages for ${username}`),
+			chalk.red(`No packages found for npm username: ${username}.`),
 		);
 
 		logger.mockRestore();
@@ -106,7 +133,7 @@ describe("tideliftMeUpCli", () => {
 			username,
 		});
 		expect(logger).toHaveBeenCalledWith(
-			chalk.red(`Could not find packages for ${username}`),
+			chalk.red(`No packages found for npm username: ${username}.`),
 		);
 
 		logger.mockRestore();
@@ -129,7 +156,7 @@ describe("tideliftMeUpCli", () => {
 			username,
 		});
 		expect(logger).toHaveBeenCalledWith(
-			chalk.red(`Could not find packages for ${username}`),
+			chalk.red(`No packages found for npm username: ${username}.`),
 		);
 
 		logger.mockRestore();
