@@ -6,7 +6,7 @@ import { getNpmWhoami } from "../getNpmWhoami.js";
 import { parseOwnership } from "../parseOwnership.js";
 import { jsonReporter } from "../reporters/jsonReporter.js";
 import { textReporter } from "../reporters/textReporter.js";
-import { tideliftMeUp } from "../tideliftMeUp.js";
+import { tideliftMeUp, TideliftMeUpError } from "../tideliftMeUp.js";
 import { PackageStatus } from "../types.js";
 import { argsOptions } from "./argsOptions.js";
 import { logHelp } from "./logHelp.js";
@@ -70,17 +70,16 @@ export async function tideliftMeUpCli(args: string[]) {
 			username,
 		});
 
+		if (packageEstimates instanceof TideliftMeUpError) {
+			throw packageEstimates;
+		}
+
 		reporters[reporter](packageEstimates);
 	} catch (error) {
-		if (
-			(error as Error).message.includes("No packages found for npm username:")
-		) {
-			console.log(chalk.red((error as Error).message));
+		if (error instanceof TideliftMeUpError) {
+			console.log(chalk.red(error.message));
 		} else {
-			console.log(
-				chalk.red(`Error: no packages found for ${username}:`),
-				error,
-			);
+			console.log(chalk.red(`Unexpected error occurred:`), error);
 		}
 	}
 }

@@ -13,21 +13,33 @@ export interface TideliftMeUpSettings {
 	username?: string;
 }
 
+export class TideliftMeUpError extends Error {
+	constructor(message: string) {
+		super(message);
+		this.name = "TideliftMeUpError";
+		Object.setPrototypeOf(this, new.target.prototype);
+	}
+}
+
 export async function tideliftMeUp({
 	ownership = ["author", "publisher"],
 	since = getTwoYearsAgo(),
 	status = "all",
 	username,
-}: TideliftMeUpSettings = {}): Promise<EstimatedPackage[]> {
+}: TideliftMeUpSettings = {}): Promise<EstimatedPackage[] | TideliftMeUpError> {
 	username ??= await getNpmWhoami();
 	if (!username) {
-		throw new Error("Either log in to npm or provide a `username`.");
+		throw new TideliftMeUpError(
+			"Either log in to npm or provide a `username`.",
+		);
 	}
 
 	const allUserPackages = await npmUsernameToPackages(username);
 
 	if (!allUserPackages.length) {
-		throw new Error(`No packages found for npm username: ${username}.`);
+		throw new TideliftMeUpError(
+			`No packages found for npm username: ${username}.`,
+		);
 	}
 
 	const relevantUserPackages = allUserPackages.filter(
