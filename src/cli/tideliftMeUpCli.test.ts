@@ -2,6 +2,7 @@ import chalk from "chalk";
 import { describe, expect, it, vi } from "vitest";
 
 import { createFakePackageData } from "../fakes.js";
+import { TideliftMeUpError } from "../tideliftMeUp.js";
 import { tideliftMeUpCli } from "./tideliftMeUpCli.js";
 
 const mockGetNpmWhoami = vi.fn();
@@ -14,11 +15,15 @@ vi.mock("../getNpmWhoami.js", () => ({
 
 const mockTideliftMeUp = vi.fn();
 
-vi.mock("../tideliftMeUp.js", () => ({
-	get tideliftMeUp() {
-		return mockTideliftMeUp;
-	},
-}));
+vi.mock("../tideliftMeUp.js", async () => {
+	const actual = await vi.importActual("../tideliftMeUp.js");
+	return {
+		get tideliftMeUp() {
+			return mockTideliftMeUp;
+		},
+		TideliftMeUpError: actual.TideliftMeUpError,
+	};
+});
 
 const mockLogHelp = vi.fn();
 
@@ -99,7 +104,9 @@ describe("tideliftMeUpCli", () => {
 		const logger = vi.spyOn(console, "log").mockImplementation(() => undefined);
 
 		mockTideliftMeUp.mockImplementation(() => {
-			throw new Error(`No packages found for npm username: ${username}.`);
+			throw new TideliftMeUpError(
+				`No packages found for npm username: ${username}.`,
+			);
 		});
 
 		await tideliftMeUpCli(["--username", username]);
@@ -122,7 +129,9 @@ describe("tideliftMeUpCli", () => {
 		const logger = vi.spyOn(console, "log").mockImplementation(() => undefined);
 
 		mockTideliftMeUp.mockImplementation(() => {
-			throw new Error(`No packages found for npm username: ${username}.`);
+			throw new TideliftMeUpError(
+				`No packages found for npm username: ${username}.`,
+			);
 		});
 
 		await tideliftMeUpCli(["--username", username]);
@@ -146,7 +155,9 @@ describe("tideliftMeUpCli", () => {
 
 		mockGetNpmWhoami.mockResolvedValue(username);
 		mockTideliftMeUp.mockImplementation(() => {
-			throw new Error(`No packages found for npm username: ${username}.`);
+			throw new TideliftMeUpError(
+				`No packages found for npm username: ${username}.`,
+			);
 		});
 
 		await tideliftMeUpCli([]);
@@ -168,7 +179,7 @@ describe("tideliftMeUpCli", () => {
 		const logger = vi.spyOn(console, "log").mockImplementation(() => undefined);
 
 		mockTideliftMeUp.mockImplementation(() => {
-			throw new Error(`Unexpected error occurred for ${username}`);
+			throw new Error(`Error: some unexpected error`);
 		});
 
 		await tideliftMeUpCli(["--username", username]);
@@ -179,8 +190,8 @@ describe("tideliftMeUpCli", () => {
 			username,
 		});
 		expect(logger).toHaveBeenCalledWith(
-			chalk.red(`Error: no packages found for ${username}:`),
-			new Error(`Unexpected error occurred for ${username}`),
+			chalk.red(`Unexpected error occurred:`),
+			new Error(`Error: some unexpected error`),
 		);
 
 		logger.mockRestore();
