@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import { parseArgs } from "node:util";
 
 import { assertValidOwnership } from "../assertValidOwnership.js";
@@ -5,7 +6,7 @@ import { getNpmWhoami } from "../getNpmWhoami.js";
 import { parseOwnership } from "../parseOwnership.js";
 import { jsonReporter } from "../reporters/jsonReporter.js";
 import { textReporter } from "../reporters/textReporter.js";
-import { tideliftMeUp } from "../tideliftMeUp.js";
+import { tideliftMeUp, TideliftMeUpError } from "../tideliftMeUp.js";
 import { PackageStatus } from "../types.js";
 import { argsOptions } from "./argsOptions.js";
 import { logHelp } from "./logHelp.js";
@@ -61,12 +62,20 @@ export async function tideliftMeUpCli(args: string[]) {
 		);
 	}
 
-	const packageEstimates = await tideliftMeUp({
-		ownership,
-		since,
-		status: status as PackageStatus,
-		username,
-	});
+	try {
+		const packageEstimates = await tideliftMeUp({
+			ownership,
+			since,
+			status: status as PackageStatus,
+			username,
+		});
 
-	reporters[reporter](packageEstimates);
+		reporters[reporter](packageEstimates);
+	} catch (error) {
+		if (error instanceof TideliftMeUpError) {
+			console.log(chalk.red(error.message));
+		} else {
+			console.log(chalk.red(`Unexpected error occurred:`), error);
+		}
+	}
 }
