@@ -70,10 +70,6 @@ export async function tideliftMeUpCli(args: string[]) {
 			username,
 		});
 
-		if (packageEstimates instanceof TideliftMeUpError) {
-			throw packageEstimates;
-		}
-
 		reporters[reporter](packageEstimates);
 	} catch (error) {
 		if (error instanceof TideliftMeUpError) {

@@ -26,7 +26,7 @@ export async function tideliftMeUp({
 	since = getTwoYearsAgo(),
 	status = "all",
 	username,
-}: TideliftMeUpSettings = {}): Promise<EstimatedPackage[] | TideliftMeUpError> {
+}: TideliftMeUpSettings = {}): Promise<EstimatedPackage[]> {
 	username ??= await getNpmWhoami();
 	if (!username) {
 		throw new TideliftMeUpError(
