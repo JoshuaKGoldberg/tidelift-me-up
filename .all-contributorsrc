@@ -54,7 +54,8 @@
       "contributions": [
         "doc",
         "tool",
-        "bug"
+        "bug",
+        "code"
       ]
     }
   ],
