@@ -13,6 +13,14 @@ export interface TideliftMeUpSettings {
 	username?: string;
 }
 
+export class TideliftMeUpError extends Error {
+	constructor(message: string) {
+		super(message);
+		this.name = "TideliftMeUpError";
+		Object.setPrototypeOf(this, new.target.prototype);
+	}
+}
+
 export async function tideliftMeUp({
 	ownership = ["author", "publisher"],
 	since = getTwoYearsAgo(),
@@ -21,10 +29,18 @@ export async function tideliftMeUp({
 }: TideliftMeUpSettings = {}): Promise<EstimatedPackage[]> {
 	username ??= await getNpmWhoami();
 	if (!username) {
-		throw new Error("Either log in to npm or provide a `username`.");
+		throw new TideliftMeUpError(
+			"Either log in to npm or provide a `username`.",
+		);
 	}
 
 	const allUserPackages = await npmUsernameToPackages(username);
+
+	if (!allUserPackages.length) {
+		throw new TideliftMeUpError(
+			`No packages found for npm username: ${username}.`,
+		);
+	}
 
 	const relevantUserPackages = allUserPackages.filter(
 		createUserPackagesFilter({ ownership, since: new Date(since), username }),
