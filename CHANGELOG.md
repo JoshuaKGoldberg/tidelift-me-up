@@ -1,3 +1,11 @@
+# Changelog
+
+# [0.5.0](https://github.com/JoshuaKGoldberg/tidelift-me-up/compare/0.4.2...0.5.0) (2025-02-24)
+
+### Features
+
+- update results for invalid user and valid user with zero packages ([#591](https://github.com/JoshuaKGoldberg/tidelift-me-up/issues/591)) ([cce61e3](https://github.com/JoshuaKGoldberg/tidelift-me-up/commit/cce61e3808cbb9e77c018e697139147ddd464866)), closes [#17](https://github.com/JoshuaKGoldberg/tidelift-me-up/issues/17) [#17](https://github.com/JoshuaKGoldberg/tidelift-me-up/issues/17)
+
 ## [0.4.2](https://github.com/JoshuaKGoldberg/tidelift-me-up/compare/0.4.1...0.4.2) (2024-11-28)
 
 ### Bug Fixes
@@ -31,5 +39,3 @@
 ### Features
 
 - allow comma-separated owners ([#190](https://github.com/JoshuaKGoldberg/tidelift-me-up/issues/190)) ([aff3478](https://github.com/JoshuaKGoldberg/tidelift-me-up/commit/aff3478c2baf4c7b7ab9ab381398c5b4ac961009)), closes [#10](https://github.com/JoshuaKGoldberg/tidelift-me-up/issues/10)
-
-# Changelog
