@@ -50,7 +50,7 @@
 		"@types/node": "^22.0.0",
 		"@types/npm-whoami": "^1.1.2",
 		"@vitest/coverage-v8": "^2.1.9",
-		"@vitest/eslint-plugin": "1.1.35",
+		"@vitest/eslint-plugin": "1.1.36",
 		"console-fail-test": "^0.5.0",
 		"cspell": "^8.17.3",
 		"eslint": "^9.20.1",
