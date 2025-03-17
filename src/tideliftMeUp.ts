@@ -1,3 +1,4 @@
+import npmUser from "npm-user";
 import { npmUsernameToPackages } from "npm-username-to-packages";
 
 import { createStatusFilter } from "./createStatusFilter.js";
@@ -37,9 +38,22 @@ export async function tideliftMeUp({
 	const allUserPackages = await npmUsernameToPackages(username);
 
 	if (!allUserPackages.length) {
-		throw new TideliftMeUpError(
-			`No packages found for npm username: ${username}.`,
-		);
+		try {
+			await npmUser(username);
+			throw new TideliftMeUpError(
+				`No packages found for npm username: ${username}.`,
+			);
+		} catch (error) {
+			if (
+				typeof error === "object" &&
+				error !== null &&
+				"code" in error &&
+				error.code === "ERR_NO_NPM_USER"
+			) {
+				throw new TideliftMeUpError(`Invalid npm username.`);
+			}
+			throw error;
+		}
 	}
 
 	const relevantUserPackages = allUserPackages.filter(
