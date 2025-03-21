@@ -41,7 +41,7 @@ describe("tideliftMeUp", () => {
 		mockGetNpmWhoami.mockRejectedValue(new Error("Should not be called."));
 
 		await expect(() => tideliftMeUp({ username })).rejects.toThrowError(
-			`No packages found for npm username: ${username}.`,
+			`Invalid npm username.`,
 		);
 	});
 
