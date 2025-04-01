@@ -38,21 +38,15 @@ export async function tideliftMeUp({
 	const allUserPackages = await npmUsernameToPackages(username);
 
 	if (!allUserPackages.length) {
-		try {
-			await npmUser(username);
+		const userExists = await doesUserExist(username);
+		if (userExists === "user with no packages") {
 			throw new TideliftMeUpError(
 				`No packages found for npm username: ${username}.`,
 			);
-		} catch (error) {
-			if (
-				typeof error === "object" &&
-				error !== null &&
-				"code" in error &&
-				error.code === "ERR_NO_NPM_USER"
-			) {
-				throw new TideliftMeUpError(`Invalid npm username.`);
-			}
-			throw error;
+		} else if (userExists === "user not found") {
+			throw new TideliftMeUpError(`Npm user not found: ${username}.`);
+		} else {
+			throw new TideliftMeUpError(`Invalid npm username: ${username}.`);
 		}
 	}
 
@@ -73,6 +67,25 @@ export async function tideliftMeUp({
 			...packageEstimate,
 			data: userPackagesByName[packageEstimate.name],
 		}));
+}
+
+async function doesUserExist(
+	username: string,
+): Promise<"invalid username" | "user not found" | "user with no packages"> {
+	try {
+		await npmUser(username);
+		return "user with no packages";
+	} catch (error) {
+		if (
+			typeof error === "object" &&
+			error !== null &&
+			"code" in error &&
+			error.code === "ERR_NO_NPM_USER"
+		) {
+			return "user not found";
+		}
+		return "invalid username";
+	}
 }
 
 function getTwoYearsAgo() {
