@@ -51,7 +51,7 @@
 		"@types/node": "^22.0.0",
 		"@types/npm-whoami": "^1.1.2",
 		"@vitest/coverage-v8": "^2.1.9",
-		"@vitest/eslint-plugin": "1.1.37",
+		"@vitest/eslint-plugin": "1.1.38",
 		"console-fail-test": "^0.5.0",
 		"cspell": "^8.17.3",
 		"eslint": "^9.20.1",
@@ -80,7 +80,7 @@
 		"typescript-eslint": "^8.24.0",
 		"vitest": "^2.1.9"
 	},
-	"packageManager": "pnpm@10.6.3",
+	"packageManager": "pnpm@10.6.5",
 	"engines": {
 		"node": ">=18"
 	},
