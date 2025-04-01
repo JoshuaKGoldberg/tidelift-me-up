@@ -39,6 +39,7 @@
 	},
 	"dependencies": {
 		"chalk": "^5.4.1",
+		"npm-user": "^6.1.1",
 		"npm-username-to-packages": "^0.1.3",
 		"npm-whoami": "^1.1.4"
 	},

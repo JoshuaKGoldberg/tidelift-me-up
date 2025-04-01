@@ -1,3 +1,4 @@
+import npmUser from "npm-user";
 import { npmUsernameToPackages } from "npm-username-to-packages";
 
 import { createStatusFilter } from "./createStatusFilter.js";
@@ -37,9 +38,7 @@ export async function tideliftMeUp({
 	const allUserPackages = await npmUsernameToPackages(username);
 
 	if (!allUserPackages.length) {
-		throw new TideliftMeUpError(
-			`No packages found for npm username: ${username}.`,
-		);
+		throw await createUserError(username);
 	}
 
 	const relevantUserPackages = allUserPackages.filter(
@@ -59,6 +58,25 @@ export async function tideliftMeUp({
 			...packageEstimate,
 			data: userPackagesByName[packageEstimate.name],
 		}));
+}
+
+async function createUserError(username: string): Promise<Error> {
+	try {
+		await npmUser(username);
+		return new TideliftMeUpError(
+			`No packages found for npm username: ${username}.`,
+		);
+	} catch (error) {
+		if (
+			typeof error === "object" &&
+			error !== null &&
+			"code" in error &&
+			error.code === "ERR_NO_NPM_USER"
+		) {
+			return new TideliftMeUpError(`Npm user not found: ${username}.`);
+		}
+		return new TideliftMeUpError(`Invalid npm username: ${username}.`);
+	}
 }
 
 function getTwoYearsAgo() {
