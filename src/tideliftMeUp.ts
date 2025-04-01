@@ -38,16 +38,7 @@ export async function tideliftMeUp({
 	const allUserPackages = await npmUsernameToPackages(username);
 
 	if (!allUserPackages.length) {
-		const userExists = await doesUserExist(username);
-		if (userExists === "user with no packages") {
-			throw new TideliftMeUpError(
-				`No packages found for npm username: ${username}.`,
-			);
-		} else if (userExists === "user not found") {
-			throw new TideliftMeUpError(`Npm user not found: ${username}.`);
-		} else {
-			throw new TideliftMeUpError(`Invalid npm username: ${username}.`);
-		}
+		throw await createUserError(username);
 	}
 
 	const relevantUserPackages = allUserPackages.filter(
@@ -69,12 +60,12 @@ export async function tideliftMeUp({
 		}));
 }
 
-async function doesUserExist(
-	username: string,
-): Promise<"invalid username" | "user not found" | "user with no packages"> {
+async function createUserError(username: string): Promise<Error> {
 	try {
 		await npmUser(username);
-		return "user with no packages";
+		return new TideliftMeUpError(
+			`No packages found for npm username: ${username}.`,
+		);
 	} catch (error) {
 		if (
 			typeof error === "object" &&
@@ -82,9 +73,9 @@ async function doesUserExist(
 			"code" in error &&
 			error.code === "ERR_NO_NPM_USER"
 		) {
-			return "user not found";
+			return new TideliftMeUpError(`Npm user not found: ${username}.`);
 		}
-		return "invalid username";
+		return new TideliftMeUpError(`Invalid npm username: ${username}.`);
 	}
 }
 
