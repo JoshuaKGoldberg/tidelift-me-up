@@ -25,6 +25,14 @@ vi.mock("./getPackageEstimates.js", () => ({
 	getPackageEstimates: () => [],
 }));
 
+const { mockNpmUser } = vi.hoisted(() => {
+	return { mockNpmUser: vi.fn() };
+});
+
+vi.mock("npm-user", () => {
+	return { default: mockNpmUser };
+});
+
 describe("tideliftMeUp", () => {
 	it("throws an error when --username isn't provided and getNpmWhoami returns undefined", async () => {
 		mockGetNpmWhoami.mockResolvedValue(undefined);
@@ -39,31 +47,64 @@ describe("tideliftMeUp", () => {
 
 		mockNpmUsernameToPackages.mockResolvedValue([]);
 		mockGetNpmWhoami.mockRejectedValue(new Error("Should not be called."));
+		mockNpmUser.mockRejectedValue(new TypeError("Username required"));
 
 		await expect(() => tideliftMeUp({ username })).rejects.toThrowError(
-			`Invalid npm username.`,
+			`Invalid npm username: ${username}.`,
 		);
 	});
 
 	it("throws an error when user is logged in but has no packages", async () => {
 		const username = "abc123";
+		const npmUserData = {
+			avatar: "",
+			email: "",
+			github: "",
+			name: "",
+			twitter: "",
+		};
 
 		mockNpmUsernameToPackages.mockResolvedValue([]);
 		mockGetNpmWhoami.mockResolvedValue(username);
+		mockNpmUser.mockResolvedValue(npmUserData);
 
 		await expect(() => tideliftMeUp()).rejects.toThrowError(
 			`No packages found for npm username: ${username}.`,
 		);
 	});
 
-	it("throws an error when valid --username is provided and has no packages", async () => {
+	it("throws an error when provided --username is valid but has no packages", async () => {
 		const username = "abc123";
+		const npmUserData = {
+			avatar: "",
+			email: "",
+			github: "",
+			name: "",
+			twitter: "",
+		};
 
 		mockNpmUsernameToPackages.mockResolvedValue([]);
 		mockGetNpmWhoami.mockRejectedValue(new Error("Should not be called."));
+		mockNpmUser.mockResolvedValue(npmUserData);
 
 		await expect(() => tideliftMeUp({ username })).rejects.toThrowError(
 			`No packages found for npm username: ${username}.`,
+		);
+	});
+
+	it("throws an error when provided --username is valid but doesn't exist", async () => {
+		const username = "nonexistent-user";
+
+		mockNpmUsernameToPackages.mockResolvedValue([]);
+		mockGetNpmWhoami.mockRejectedValue(new Error("Should not be called."));
+		mockNpmUser.mockRejectedValue(
+			Object.assign(new Error(`User \`${username}\` could not be found`), {
+				code: "ERR_NO_NPM_USER",
+			}),
+		);
+
+		await expect(() => tideliftMeUp({ username })).rejects.toThrowError(
+			`Npm user not found: ${username}.`,
 		);
 	});
 
