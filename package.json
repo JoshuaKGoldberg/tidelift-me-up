@@ -1,6 +1,6 @@
 {
 	"name": "tidelift-me-up",
-	"version": "0.5.0",
+	"version": "0.6.0",
 	"description": "CLI that checks if your npm packages are eligible for Tidelift funding. 💸",
 	"repository": {
 		"type": "git",

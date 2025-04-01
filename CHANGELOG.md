@@ -1,5 +1,11 @@
 # Changelog
 
+# [0.6.0](https://github.com/JoshuaKGoldberg/tidelift-me-up/compare/0.5.0...0.6.0) (2025-04-01)
+
+### Features
+
+- add npm user validity check ([#659](https://github.com/JoshuaKGoldberg/tidelift-me-up/issues/659)) ([e966d9d](https://github.com/JoshuaKGoldberg/tidelift-me-up/commit/e966d9d42f87b3ad82cf7162cce90ce92cec2f96)), closes [#649](https://github.com/JoshuaKGoldberg/tidelift-me-up/issues/649)
+
 # [0.5.0](https://github.com/JoshuaKGoldberg/tidelift-me-up/compare/0.4.2...0.5.0) (2025-02-24)
 
 ### Features
