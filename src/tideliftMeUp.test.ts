@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 
 import { createFakePackageData } from "./fakes.js";
-import { tideliftMeUp } from "./tideliftMeUp.js";
+import { tideliftMeUp, TideliftMeUpError } from "./tideliftMeUp.js";
 
 const mockNpmUsernameToPackages = vi
 	.fn()
@@ -38,7 +38,7 @@ describe("tideliftMeUp", () => {
 		mockGetNpmWhoami.mockResolvedValue(undefined);
 
 		await expect(() => tideliftMeUp()).rejects.toEqual(
-			new Error("Either log in to npm or provide a `username`."),
+			new TideliftMeUpError("Either log in to npm or provide a `username`."),
 		);
 	});
 
