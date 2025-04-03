@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.6.1](https://github.com/JoshuaKGoldberg/tidelift-me-up/compare/0.6.0...0.6.1) (2025-04-03)
+
+### Bug Fixes
+
+- bump to create-typescript-app@2 with transitions action ([#684](https://github.com/JoshuaKGoldberg/tidelift-me-up/issues/684)) ([2b26d03](https://github.com/JoshuaKGoldberg/tidelift-me-up/commit/2b26d030a03b0fff136111590767e710ad9f15a6)), closes [#664](https://github.com/JoshuaKGoldberg/tidelift-me-up/issues/664)
+
 # [0.6.0](https://github.com/JoshuaKGoldberg/tidelift-me-up/compare/0.5.0...0.6.0) (2025-04-01)
 
 ### Features
