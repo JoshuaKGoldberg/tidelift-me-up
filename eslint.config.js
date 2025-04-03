@@ -5,7 +5,7 @@ import jsdoc from "eslint-plugin-jsdoc";
 import jsonc from "eslint-plugin-jsonc";
 import markdown from "eslint-plugin-markdown";
 import n from "eslint-plugin-n";
-import packageJson from "eslint-plugin-package-json/configs/recommended";
+import packageJson from "eslint-plugin-package-json";
 import perfectionist from "eslint-plugin-perfectionist";
 import * as regexp from "eslint-plugin-regexp";
 import yml from "eslint-plugin-yml";
@@ -24,7 +24,7 @@ export default tseslint.config(
 	jsonc.configs["flat/recommended-with-json"],
 	markdown.configs.recommended,
 	n.configs["flat/recommended"],
-	packageJson,
+	packageJson.configs.recommended,
 	perfectionist.configs["recommended-natural"],
 	regexp.configs["flat/recommended"],
 	{
@@ -32,7 +32,7 @@ export default tseslint.config(
 			tseslint.configs.strictTypeChecked,
 			tseslint.configs.stylisticTypeChecked,
 		],
-		files: ["**/*.js", "**/*.ts"],
+		files: ["**/*.{js,ts}"],
 		languageOptions: {
 			parserOptions: {
 				projectService: {
@@ -42,18 +42,9 @@ export default tseslint.config(
 			},
 		},
 		rules: {
-			// These on-by-default rules work well for this repo if configured
-			"@typescript-eslint/restrict-template-expressions": [
-				"error",
-				{ allowBoolean: true, allowNullish: true, allowNumber: true },
-			],
-			"n/no-missing-import": ["error", { allowModules: ["tidelift-me-up"] }],
 			"n/no-unsupported-features/node-builtins": [
 				"error",
-				{
-					allowExperimental: true,
-					version: "18.3.0",
-				},
+				{ allowExperimental: true, version: "18.3.0" },
 			],
 
 			// Stylistic concerns that don't interfere with Prettier
@@ -66,9 +57,16 @@ export default tseslint.config(
 			"object-shorthand": "error",
 			"operator-assignment": "error",
 		},
-		settings: { perfectionist: { partitionByComment: true, type: "natural" } },
+		settings: {
+			perfectionist: { partitionByComment: true, type: "natural" },
+			vitest: { typecheck: true },
+		},
 	},
-	{ extends: [tseslint.configs.disableTypeChecked], files: ["**/*.md/*.ts"] },
+	{
+		extends: [tseslint.configs.disableTypeChecked],
+		files: ["**/*.md/*.ts"],
+		rules: { "n/no-missing-import": "off" },
+	},
 	{
 		extends: [vitest.configs.recommended],
 		files: ["**/*.test.*"],

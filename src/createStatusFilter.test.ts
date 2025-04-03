@@ -12,7 +12,7 @@ describe("createStatusFilter", () => {
 		["available", false, true],
 		["lifted", true, false],
 	] as const)("when status is %s", (status, lifted, notLifted) => {
-		it(`returns ${lifted} when lifted is true`, () => {
+		it(`returns ${lifted.toString()} when lifted is true`, () => {
 			const filter = createStatusFilter(status);
 
 			const actual = filter({ lifted: true, name: "" });
@@ -20,7 +20,7 @@ describe("createStatusFilter", () => {
 			expect(actual).toBe(lifted);
 		});
 
-		it(`returns ${notLifted} when lifted is false`, () => {
+		it(`returns ${notLifted.toString()} when lifted is false`, () => {
 			const filter = createStatusFilter(status);
 
 			const actual = filter({ estimatedMoney: 10, lifted: false, name: "" });
