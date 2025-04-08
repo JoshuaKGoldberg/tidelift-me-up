@@ -1,56 +1,68 @@
 {
-	"badgeTemplate": "\t<a href=\"#contributors\" target=\"_blank\"><img alt=\"👪 All Contributors: <%= contributors.length %>\" src=\"https://img.shields.io/badge/%F0%9F%91%AA_all_contributors-<%= contributors.length %>-21bb42.svg\" /></a>",
-	"contributors": [
-		{
-			"avatar_url": "https://avatars.githubusercontent.com/u/3335181?v=4",
-			"contributions": [
-				"tool",
-				"code",
-				"bug",
-				"ideas",
-				"maintenance",
-				"infra",
-				"doc",
-				"content",
-				"projectManagement"
-			],
-			"login": "JoshuaKGoldberg",
-			"name": "Josh Goldberg",
-			"profile": "http://www.joshuakgoldberg.com"
-		},
-		{
-			"login": "ljharb",
-			"name": "Jordan Harband",
-			"avatar_url": "https://avatars.githubusercontent.com/u/45469?v=4",
-			"profile": "https://github.com/ljharb",
-			"contributions": ["ideas", "bug"]
-		},
-		{
-			"login": "sindresorhus",
-			"name": "Sindre Sorhus",
-			"avatar_url": "https://avatars.githubusercontent.com/u/170270?v=4",
-			"profile": "https://sindresorhus.com/apps",
-			"contributions": ["bug"]
-		},
-		{
-			"login": "StyleShit",
-			"name": "StyleShit",
-			"avatar_url": "https://avatars.githubusercontent.com/u/32631382?v=4",
-			"profile": "https://github.com/StyleShit",
-			"contributions": ["code"]
-		},
-		{
-			"login": "maggienegm",
-			"name": "Maggie",
-			"avatar_url": "https://avatars.githubusercontent.com/u/8771586?v=4",
-			"profile": "https://github.com/maggienegm",
-			"contributions": ["doc", "tool", "bug", "code", "ideas"]
-		}
-	],
-	"contributorsSortAlphabetically": true,
-	"projectName": "tidelift-me-up",
-	"projectOwner": "JoshuaKGoldberg",
-	"repoType": "github",
-	"commitConvention": "angular"
+  "badgeTemplate": "\t<a href=\"#contributors\" target=\"_blank\"><img alt=\"👪 All Contributors: <%= contributors.length %>\" src=\"https://img.shields.io/badge/%F0%9F%91%AA_all_contributors-<%= contributors.length %>-21bb42.svg\" /></a>",
+  "contributors": [
+    {
+      "avatar_url": "https://avatars.githubusercontent.com/u/3335181?v=4",
+      "contributions": [
+        "tool",
+        "code",
+        "bug",
+        "ideas",
+        "maintenance",
+        "infra",
+        "doc",
+        "content",
+        "projectManagement"
+      ],
+      "login": "JoshuaKGoldberg",
+      "name": "Josh Goldberg",
+      "profile": "http://www.joshuakgoldberg.com"
+    },
+    {
+      "login": "ljharb",
+      "name": "Jordan Harband",
+      "avatar_url": "https://avatars.githubusercontent.com/u/45469?v=4",
+      "profile": "https://github.com/ljharb",
+      "contributions": [
+        "ideas",
+        "bug"
+      ]
+    },
+    {
+      "login": "sindresorhus",
+      "name": "Sindre Sorhus",
+      "avatar_url": "https://avatars.githubusercontent.com/u/170270?v=4",
+      "profile": "https://sindresorhus.com/apps",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
+      "login": "StyleShit",
+      "name": "StyleShit",
+      "avatar_url": "https://avatars.githubusercontent.com/u/32631382?v=4",
+      "profile": "https://github.com/StyleShit",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "maggienegm",
+      "name": "Maggie",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8771586?v=4",
+      "profile": "https://github.com/maggienegm",
+      "contributions": [
+        "doc",
+        "tool",
+        "bug",
+        "code",
+        "ideas"
+      ]
+    }
+  ],
+  "contributorsSortAlphabetically": true,
+  "projectName": "tidelift-me-up",
+  "projectOwner": "JoshuaKGoldberg",
+  "repoType": "github",
+  "commitConvention": "angular"
 }
-
