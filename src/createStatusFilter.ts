@@ -9,9 +9,14 @@ export function createStatusFilter(status: PackageStatus): PackageFilter {
 			return () => true;
 
 		case "available":
-			return (packageEstimate) => !packageEstimate.lifted;
+			return (packageEstimate) =>
+				!packageEstimate.lifted && packageEstimate.estimatedMoney > 0;
 
 		case "lifted":
 			return (packageEstimate) => packageEstimate.lifted;
+
+		case "needs-subscribers":
+			return (packageEstimate) =>
+				!packageEstimate.lifted && packageEstimate.estimatedMoney === 0;
 	}
 }

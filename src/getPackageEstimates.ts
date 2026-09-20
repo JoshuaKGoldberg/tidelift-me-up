@@ -39,10 +39,20 @@ export async function getPackageEstimates(
 		},
 	);
 	const json = (await response.json()) as PackageEstimateData[];
+	const estimatedNames = new Set(json.map((data) => data.name));
 
-	return json.map((data) => ({
-		estimatedMoney: parseFloat(data.estimated_money),
-		lifted: data.lifted,
-		name: data.name,
-	}));
+	return [
+		...json.map((data) => ({
+			estimatedMoney: parseFloat(data.estimated_money),
+			lifted: data.lifted,
+			name: data.name,
+		})),
+		...packageNames
+			.filter((packageName) => !estimatedNames.has(packageName))
+			.map((packageName) => ({
+				estimatedMoney: 0,
+				lifted: false as const,
+				name: packageName,
+			})),
+	];
 }

@@ -38,4 +38,36 @@ describe("getPackageEstimates", () => {
 			},
 		]);
 	});
+
+	it("fills in packages missing from the response as not lifted with no estimate", async () => {
+		mockFetch.mockResolvedValue({
+			json: () => [
+				{
+					estimated_money: 12.34,
+					lifted: false,
+					name: "abc",
+				},
+			],
+		});
+
+		const result = await getPackageEstimates(["abc", "def", "ghi"]);
+
+		expect(result).toEqual([
+			{
+				estimatedMoney: 12.34,
+				lifted: false,
+				name: "abc",
+			},
+			{
+				estimatedMoney: 0,
+				lifted: false,
+				name: "def",
+			},
+			{
+				estimatedMoney: 0,
+				lifted: false,
+				name: "ghi",
+			},
+		]);
+	});
 });

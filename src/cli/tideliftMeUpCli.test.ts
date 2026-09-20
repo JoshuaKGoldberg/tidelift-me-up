@@ -53,13 +53,13 @@ describe("tideliftMeUpCli", () => {
 		);
 	});
 
-	it("throws an error when --status is provided and not all, available, or lifted", async () => {
+	it("throws an error when --status is provided and not all, available, lifted, or needs-subscribers", async () => {
 		mockGetNpmWhoami.mockResolvedValue(undefined);
 
-		const reporter = "invalid";
-		await expect(() => tideliftMeUpCli(["--status", reporter])).rejects.toEqual(
+		const status = "invalid";
+		await expect(() => tideliftMeUpCli(["--status", status])).rejects.toEqual(
 			new Error(
-				`--status must be "all", "available", or "lifted", not ${reporter}.`,
+				`--status must be "all", "available", "lifted", or "needs-subscribers", not ${status}.`,
 			),
 		);
 	});

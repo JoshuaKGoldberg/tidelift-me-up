@@ -20,4 +20,8 @@ export interface EstimatedPackageNotLifted extends EstimatedPackageBase {
 
 export type PackageOwnership = "author" | "maintainer" | "publisher";
 
-export type PackageStatus = "all" | "available" | "lifted";
+export type PackageStatus =
+	| "all"
+	| "available"
+	| "lifted"
+	| "needs-subscribers";
