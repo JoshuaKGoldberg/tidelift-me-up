@@ -78,5 +78,7 @@ export async function tideliftMeUpCli(args: string[]) {
 		} else {
 			console.log(chalk.red(`Unexpected error occurred:`), error);
 		}
+
+		process.exitCode = 1;
 	}
 }

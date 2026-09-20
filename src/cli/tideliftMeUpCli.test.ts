@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { createFakePackageData } from "../fakes.js";
 import { TideliftMeUpError } from "../tideliftMeUp.js";
@@ -34,6 +34,10 @@ vi.mock("./logHelp.js", () => ({
 }));
 
 describe("tideliftMeUpCli", () => {
+	afterEach(() => {
+		process.exitCode = undefined;
+	});
+
 	it("logs help when args include --help", async () => {
 		await tideliftMeUpCli(["--help"]);
 
@@ -96,6 +100,7 @@ describe("tideliftMeUpCli", () => {
 		expect(logger).toHaveBeenCalledWith(
 			chalk.gray(`✅ package1 is already lifted.`),
 		);
+		expect(process.exitCode).toBeUndefined();
 	});
 
 	it("logs message when an invalid --username is provided", async () => {
@@ -119,6 +124,7 @@ describe("tideliftMeUpCli", () => {
 		expect(logger).toHaveBeenCalledWith(
 			chalk.red(`No packages found for npm username: ${username}.`),
 		);
+		expect(process.exitCode).toBe(1);
 
 		logger.mockRestore();
 	});
@@ -144,6 +150,7 @@ describe("tideliftMeUpCli", () => {
 		expect(logger).toHaveBeenCalledWith(
 			chalk.red(`No packages found for npm username: ${username}.`),
 		);
+		expect(process.exitCode).toBe(1);
 
 		logger.mockRestore();
 	});
@@ -169,6 +176,7 @@ describe("tideliftMeUpCli", () => {
 		expect(logger).toHaveBeenCalledWith(
 			chalk.red(`No packages found for npm username: ${username}.`),
 		);
+		expect(process.exitCode).toBe(1);
 
 		logger.mockRestore();
 	});
@@ -193,6 +201,7 @@ describe("tideliftMeUpCli", () => {
 			chalk.red(`Unexpected error occurred:`),
 			new Error(`Error: some unexpected error`),
 		);
+		expect(process.exitCode).toBe(1);
 
 		logger.mockRestore();
 	});
