@@ -4,7 +4,7 @@ import { createStatusFilter } from "./createStatusFilter.js";
 
 describe("createStatusFilter", () => {
 	describe.each([
-		["all", true, true, false],
+		["all", true, true, true],
 		["available", false, true, false],
 		["lifted", true, false, false],
 		["needs-subscribers", false, false, true],

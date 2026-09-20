@@ -6,8 +6,7 @@ export type PackageFilter = (packageEstimate: PackageEstimate) => boolean;
 export function createStatusFilter(status: PackageStatus): PackageFilter {
 	switch (status) {
 		case "all":
-			return (packageEstimate) =>
-				packageEstimate.lifted || packageEstimate.estimatedMoney > 0;
+			return () => true;
 
 		case "available":
 			return (packageEstimate) =>
