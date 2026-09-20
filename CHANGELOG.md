@@ -1,5 +1,15 @@
 # Changelog
 
+# [0.7.0](https://github.com/JoshuaKGoldberg/tidelift-me-up/compare/0.6.1...0.7.0) (2026-09-20)
+
+### Bug Fixes
+
+- exit with a non-zero code when the CLI reports an error ([#1071](https://github.com/JoshuaKGoldberg/tidelift-me-up/issues/1071)) ([0723d5c](https://github.com/JoshuaKGoldberg/tidelift-me-up/commit/0723d5ccc899fd6132c609a06b0a73480cc9786d)), closes [#608](https://github.com/JoshuaKGoldberg/tidelift-me-up/issues/608) [#608](https://github.com/JoshuaKGoldberg/tidelift-me-up/issues/608) [#591](https://github.com/JoshuaKGoldberg/tidelift-me-up/issues/591) [#659](https://github.com/JoshuaKGoldberg/tidelift-me-up/issues/659)
+
+### Features
+
+- add needs-subscribers status filter ([#1070](https://github.com/JoshuaKGoldberg/tidelift-me-up/issues/1070)) ([b72f12a](https://github.com/JoshuaKGoldberg/tidelift-me-up/commit/b72f12a49c022b3e01055cabf72f0c3d070780de)), closes [#255](https://github.com/JoshuaKGoldberg/tidelift-me-up/issues/255)
+
 ## [0.6.1](https://github.com/JoshuaKGoldberg/tidelift-me-up/compare/0.6.0...0.6.1) (2025-04-03)
 
 ### Bug Fixes
