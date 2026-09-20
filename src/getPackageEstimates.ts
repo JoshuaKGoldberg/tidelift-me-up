@@ -47,8 +47,6 @@ export async function getPackageEstimates(
 			lifted: data.lifted,
 			name: data.name,
 		})),
-		// Tidelift's API omits packages that aren't lifted and don't yet have
-		// enough subscribers to estimate income for. Fill those in as $0.
 		...packageNames
 			.filter((packageName) => !estimatedNames.has(packageName))
 			.map((packageName) => ({
