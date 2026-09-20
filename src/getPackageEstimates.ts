@@ -39,10 +39,22 @@ export async function getPackageEstimates(
 		},
 	);
 	const json = (await response.json()) as PackageEstimateData[];
+	const estimatedNames = new Set(json.map((data) => data.name));
 
-	return json.map((data) => ({
-		estimatedMoney: parseFloat(data.estimated_money),
-		lifted: data.lifted,
-		name: data.name,
-	}));
+	return [
+		...json.map((data) => ({
+			estimatedMoney: parseFloat(data.estimated_money),
+			lifted: data.lifted,
+			name: data.name,
+		})),
+		// Tidelift's API omits packages that aren't lifted and don't yet have
+		// enough subscribers to estimate income for. Fill those in as $0.
+		...packageNames
+			.filter((packageName) => !estimatedNames.has(packageName))
+			.map((packageName) => ({
+				estimatedMoney: 0,
+				lifted: false as const,
+				name: packageName,
+			})),
+	];
 }

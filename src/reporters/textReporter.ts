@@ -14,6 +14,17 @@ export function textReporter(estimatedPackages: EstimatedPackage[]) {
 			continue;
 		}
 
+		if (estimatedPackage.estimatedMoney === 0) {
+			console.log(
+				[
+					chalk.yellow(`⏳ `),
+					chalk.yellowBright(estimatedPackage.name),
+					` is not yet lifted, and needs subscribers before it can be estimated.`,
+				].join(""),
+			);
+			continue;
+		}
+
 		const currency = formatter.format(estimatedPackage.estimatedMoney);
 
 		console.log(

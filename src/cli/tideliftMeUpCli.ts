@@ -48,10 +48,11 @@ export async function tideliftMeUpCli(args: string[]) {
 		status &&
 		status !== "all" &&
 		status !== "available" &&
-		status !== "lifted"
+		status !== "lifted" &&
+		status !== "needs-subscribers"
 	) {
 		throw new Error(
-			`--status must be "all", "available", or "lifted", not ${status}.`,
+			`--status must be "all", "available", "lifted", or "needs-subscribers", not ${status}.`,
 		);
 	}
 

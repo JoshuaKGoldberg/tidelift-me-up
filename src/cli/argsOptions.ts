@@ -37,7 +37,7 @@ export const argsOptions = {
 	},
 	status: {
 		description:
-			"(default: 'all') If provided, a filter on package lifting status: 'all', 'available', or 'lifted'.",
+			"(default: 'all') If provided, a filter on package lifting status: 'all', 'available', 'lifted', or 'needs-subscribers'.",
 		type: "string",
 	},
 	username: {
