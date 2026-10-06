@@ -1,62 +1,73 @@
 import chalk from "chalk";
-import { parseArgs } from "node:util";
+import { createCli } from "parse-standard-args";
+import { z } from "zod";
 
-import { assertValidOwnership } from "../assertValidOwnership.js";
 import { getNpmWhoami } from "../getNpmWhoami.js";
 import { parseOwnership } from "../parseOwnership.js";
 import { jsonReporter } from "../reporters/jsonReporter.js";
 import { textReporter } from "../reporters/textReporter.js";
 import { tideliftMeUp, TideliftMeUpError } from "../tideliftMeUp.js";
-import { PackageStatus } from "../types.js";
-import { argsOptions } from "./argsOptions.js";
-import { logHelp } from "./logHelp.js";
 
 const reporters = {
 	json: jsonReporter,
 	text: textReporter,
 };
 
-export async function tideliftMeUpCli(args: string[]) {
-	const { values } = parseArgs({
-		args,
-		options: argsOptions,
-		tokens: true,
-	});
+const cli = createCli({
+	description: "Checks if your npm packages are eligible for Tidelift funding.",
+	name: "tidelift-me-up",
+	options: z.object({
+		ownership: z
+			.array(z.string())
+			.transform(parseOwnership)
+			.pipe(z.array(choice(["author", "maintainer", "publisher"])))
+			.optional()
+			.describe(
+				"Any filters user packages must match one of based on username: 'author', 'maintainer', and/or 'publisher'.",
+			)
+			.meta({
+				defaultDescription: "author and publisher",
+				placeholder: "author|maintainer|publisher",
+			}),
+		reporter: choice(["json", "text"])
+			.default("text")
+			.describe(
+				"Either 'json' to output a raw JSON string, or 'text' for human-readable output.",
+			),
+		since: z
+			.string()
+			.optional()
+			.describe(
+				"A date that packages need to have been updated since to be considered.",
+			)
+			.meta({ defaultDescription: "2 years ago", placeholder: "date" }),
+		status: choice(["all", "available", "lifted", "needs-subscribers"])
+			.optional()
+			.describe(
+				"If provided, a filter on package lifting status: 'all', 'available', 'lifted', or 'needs-subscribers'.",
+			)
+			.meta({ defaultDescription: "all" }),
+		username: z
+			.string()
+			.optional()
+			.describe("The npm username to search for packages owned by.")
+			.meta({ defaultDescription: "result of npm whoami" }),
+	}),
+});
 
-	if (values.help) {
-		logHelp();
+export async function tideliftMeUpCli(args: string[]) {
+	const parsed = await cli.run(args, {
+		error: (text) => {
+			console.error(chalk.red(text));
+		},
+	});
+	if (!parsed) {
 		return;
 	}
 
-	const {
-		reporter: reporterRaw,
-		since,
-		status,
-		username: usernameRaw,
-	} = values;
+	const { ownership, reporter, since, status } = parsed.values;
 
-	const ownership = parseOwnership(values.ownership);
-
-	assertValidOwnership(ownership);
-
-	const reporter = reporterRaw ?? "text";
-	if (reporter !== "json" && reporter !== "text") {
-		throw new Error(`--reporter must be "json" or "text", not ${reporter}.`);
-	}
-
-	if (
-		status &&
-		status !== "all" &&
-		status !== "available" &&
-		status !== "lifted" &&
-		status !== "needs-subscribers"
-	) {
-		throw new Error(
-			`--status must be "all", "available", "lifted", or "needs-subscribers", not ${status}.`,
-		);
-	}
-
-	const username = usernameRaw ?? (await getNpmWhoami());
+	const username = parsed.values.username ?? (await getNpmWhoami());
 	if (!username) {
 		throw new Error(
 			"Either log in to npm or provide a username with --username.",
@@ -67,7 +78,7 @@ export async function tideliftMeUpCli(args: string[]) {
 		const packageEstimates = await tideliftMeUp({
 			ownership,
 			since,
-			status: status as PackageStatus,
+			status,
 			username,
 		});
 
@@ -81,4 +92,17 @@ export async function tideliftMeUpCli(args: string[]) {
 
 		process.exitCode = 1;
 	}
+}
+
+function choice<const Values extends readonly [string, ...string[]]>(
+	values: Values,
+) {
+	const expected = new Intl.ListFormat("en", { type: "disjunction" }).format(
+		values.map((value) => JSON.stringify(value)),
+	);
+
+	return z.enum(values, {
+		error: (issue) =>
+			`Expected ${expected}, received ${JSON.stringify(issue.input)}.`,
+	});
 }

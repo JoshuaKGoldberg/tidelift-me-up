@@ -1,5 +1,5 @@
-export function parseOwnership(raw: string[] | undefined) {
+export function parseOwnership(raw: string[]) {
 	return raw
-		?.flatMap((raw) => raw.split(","))
+		.flatMap((raw) => raw.split(","))
 		.map((ownership) => ownership.trim());
 }
