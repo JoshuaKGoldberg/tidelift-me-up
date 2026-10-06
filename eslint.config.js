@@ -25,6 +25,11 @@ export default tseslint.config(
 	markdown.configs.recommended,
 	n.configs["flat/recommended"],
 	packageJson.configs.recommended,
+	{
+		// TODO: Remove once parse-standard-args is published and no longer a link: dependency.
+		files: ["package.json"],
+		rules: { "package-json/valid-dependencies": "off" },
+	},
 	perfectionist.configs["recommended-natural"],
 	regexp.configs["flat/recommended"],
 	{
