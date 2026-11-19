@@ -226,7 +226,7 @@ describe("tideliftMeUpCli", () => {
 		expect(mockTideliftMeUp).toHaveBeenCalledWith({
 			username,
 		});
-		expect(mockLog).toHaveBeenCalledWith(
+		expect(mockError).toHaveBeenCalledWith(
 			chalk.red(`No packages found for npm username: ${username}.`),
 		);
 		expect(process.exitCode).toBe(1);
@@ -245,7 +245,7 @@ describe("tideliftMeUpCli", () => {
 		expect(mockTideliftMeUp).toHaveBeenCalledWith({
 			username,
 		});
-		expect(mockLog).toHaveBeenCalledWith(
+		expect(mockError).toHaveBeenCalledWith(
 			chalk.red(`No packages found for npm username: ${username}.`),
 		);
 		expect(process.exitCode).toBe(1);
@@ -264,7 +264,7 @@ describe("tideliftMeUpCli", () => {
 		expect(mockTideliftMeUp).toHaveBeenCalledWith({
 			username,
 		});
-		expect(mockLog).toHaveBeenCalledWith(
+		expect(mockError).toHaveBeenCalledWith(
 			chalk.red(`No packages found for npm username: ${username}.`),
 		);
 		expect(process.exitCode).toBe(1);
@@ -281,7 +281,7 @@ describe("tideliftMeUpCli", () => {
 		expect(mockTideliftMeUp).toHaveBeenCalledWith({
 			username,
 		});
-		expect(mockLog).toHaveBeenCalledWith(
+		expect(mockError).toHaveBeenCalledWith(
 			chalk.red(`Unexpected error occurred:`),
 			new Error(`Error: some unexpected error`),
 		);

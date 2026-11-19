@@ -7,11 +7,17 @@ import { parseOwnership } from "../parseOwnership.js";
 import { jsonReporter } from "../reporters/jsonReporter.js";
 import { textReporter } from "../reporters/textReporter.js";
 import { tideliftMeUp, TideliftMeUpError } from "../tideliftMeUp.js";
+import { packageOwnerships, packageStatuses } from "../types.js";
 
 const reporters = {
 	json: jsonReporter,
 	text: textReporter,
 };
+
+function formatChoices(choices: readonly string[], quote: string, or = "or") {
+	const quoted = choices.map((choice) => `${quote}${choice}${quote}`);
+	return `${quoted.slice(0, -1).join(", ")}, ${or} ${quoted[quoted.length - 1]}`;
+}
 
 const settings = {
 	description: "Checks if your npm packages are eligible for Tidelift funding.",
@@ -22,15 +28,15 @@ const settings = {
 			.transform(parseOwnership)
 			.pipe(
 				z.array(
-					z.enum(["author", "maintainer", "publisher"], {
+					z.enum(packageOwnerships, {
 						error: (issue) =>
-							`Expected "author", "maintainer", or "publisher", received ${JSON.stringify(issue.input)}.`,
+							`Expected ${formatChoices(packageOwnerships, '"')}, received ${JSON.stringify(issue.input)}.`,
 					}),
 				),
 			)
 			.optional()
 			.describe(
-				"Any filters user packages must match one of based on username: 'author', 'maintainer', and/or 'publisher'.",
+				`Any filters user packages must match one of based on username: ${formatChoices(packageOwnerships, "'", "and/or")}.`,
 			)
 			.meta({
 				defaultDescription: "author and publisher",
@@ -50,10 +56,10 @@ const settings = {
 			)
 			.meta({ defaultDescription: "2 years ago", placeholder: "date" }),
 		status: z
-			.enum(["all", "available", "lifted", "needs-subscribers"])
+			.enum(packageStatuses)
 			.optional()
 			.describe(
-				"If provided, a filter on package lifting status: 'all', 'available', 'lifted', or 'needs-subscribers'.",
+				`If provided, a filter on package lifting status: ${formatChoices(packageStatuses, "'")}.`,
 			)
 			.meta({ defaultDescription: "all" }),
 		username: z
@@ -100,9 +106,9 @@ export async function tideliftMeUpCli(args: string[]) {
 		reporters[reporter](packageEstimates);
 	} catch (error) {
 		if (error instanceof TideliftMeUpError) {
-			console.log(chalk.red(error.message));
+			console.error(chalk.red(error.message));
 		} else {
-			console.log(chalk.red(`Unexpected error occurred:`), error);
+			console.error(chalk.red(`Unexpected error occurred:`), error);
 		}
 
 		process.exitCode = 1;

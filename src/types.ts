@@ -18,10 +18,15 @@ export interface EstimatedPackageNotLifted extends EstimatedPackageBase {
 	lifted: false;
 }
 
-export type PackageOwnership = "author" | "maintainer" | "publisher";
+export const packageOwnerships = ["author", "maintainer", "publisher"] as const;
 
-export type PackageStatus =
-	| "all"
-	| "available"
-	| "lifted"
-	| "needs-subscribers";
+export type PackageOwnership = (typeof packageOwnerships)[number];
+
+export const packageStatuses = [
+	"all",
+	"available",
+	"lifted",
+	"needs-subscribers",
+] as const;
+
+export type PackageStatus = (typeof packageStatuses)[number];
