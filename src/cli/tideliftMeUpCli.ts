@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import { createCli } from "parse-standard-args";
+import { parseStandardArgv } from "parse-standard-args";
 import { z } from "zod";
 
 import { getNpmWhoami } from "../getNpmWhoami.js";
@@ -13,7 +13,7 @@ const reporters = {
 	text: textReporter,
 };
 
-const cli = createCli({
+const settings = {
 	description: "Checks if your npm packages are eligible for Tidelift funding.",
 	name: "tidelift-me-up",
 	options: z.object({
@@ -53,15 +53,19 @@ const cli = createCli({
 			.describe("The npm username to search for packages owned by.")
 			.meta({ defaultDescription: "result of npm whoami" }),
 	}),
-});
+};
 
 export async function tideliftMeUpCli(args: string[]) {
-	const parsed = await cli.run(args, {
-		error: (text) => {
-			console.error(chalk.red(text));
-		},
-	});
-	if (!parsed) {
+	const parsed = parseStandardArgv(args, settings);
+
+	if (parsed.type === "error") {
+		console.error(chalk.red(parsed.text));
+		process.exitCode = 1;
+		return;
+	}
+
+	if (parsed.type !== "values") {
+		console.log(parsed.text);
 		return;
 	}
 
