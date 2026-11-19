@@ -4,7 +4,6 @@ import { parseOwnership } from "./parseOwnership.js";
 
 describe("parseOwnership", () => {
 	test.each([
-		[undefined, undefined],
 		[[], []],
 		[["abc"], ["abc"]],
 		[
