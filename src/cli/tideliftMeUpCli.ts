@@ -20,7 +20,14 @@ const settings = {
 		ownership: z
 			.array(z.string())
 			.transform(parseOwnership)
-			.pipe(z.array(choice(["author", "maintainer", "publisher"])))
+			.pipe(
+				z.array(
+					z.enum(["author", "maintainer", "publisher"], {
+						error: (issue) =>
+							`Expected "author", "maintainer", or "publisher", received ${JSON.stringify(issue.input)}.`,
+					}),
+				),
+			)
 			.optional()
 			.describe(
 				"Any filters user packages must match one of based on username: 'author', 'maintainer', and/or 'publisher'.",
@@ -29,7 +36,8 @@ const settings = {
 				defaultDescription: "author and publisher",
 				placeholder: "author|maintainer|publisher",
 			}),
-		reporter: choice(["json", "text"])
+		reporter: z
+			.enum(["json", "text"])
 			.default("text")
 			.describe(
 				"Either 'json' to output a raw JSON string, or 'text' for human-readable output.",
@@ -41,7 +49,8 @@ const settings = {
 				"A date that packages need to have been updated since to be considered.",
 			)
 			.meta({ defaultDescription: "2 years ago", placeholder: "date" }),
-		status: choice(["all", "available", "lifted", "needs-subscribers"])
+		status: z
+			.enum(["all", "available", "lifted", "needs-subscribers"])
 			.optional()
 			.describe(
 				"If provided, a filter on package lifting status: 'all', 'available', 'lifted', or 'needs-subscribers'.",
@@ -73,9 +82,11 @@ export async function tideliftMeUpCli(args: string[]) {
 
 	const username = parsed.values.username ?? (await getNpmWhoami());
 	if (!username) {
-		throw new Error(
-			"Either log in to npm or provide a username with --username.",
+		console.error(
+			chalk.red("Either log in to npm or provide a username with --username."),
 		);
+		process.exitCode = 1;
+		return;
 	}
 
 	try {
@@ -96,17 +107,4 @@ export async function tideliftMeUpCli(args: string[]) {
 
 		process.exitCode = 1;
 	}
-}
-
-function choice<const Values extends readonly [string, ...string[]]>(
-	values: Values,
-) {
-	const expected = new Intl.ListFormat("en", { type: "disjunction" }).format(
-		values.map((value) => JSON.stringify(value)),
-	);
-
-	return z.enum(values, {
-		error: (issue) =>
-			`Expected ${expected}, received ${JSON.stringify(issue.input)}.`,
-	});
 }

@@ -74,7 +74,7 @@ describe("tideliftMeUpCli", () => {
 	`);
 	});
 
-	it("logs the same help when args include -h", async () => {
+	it("logs the same help for -h as for --help", async () => {
 		await tideliftMeUpCli(["--help"]);
 		const helpCalls = [...mockLog.mock.calls];
 		mockLog.mockClear();
@@ -90,7 +90,7 @@ describe("tideliftMeUpCli", () => {
 
 		await tideliftMeUpCli([]);
 
-		expect(mockTideliftMeUp).toHaveBeenCalledWith({
+		expect(mockTideliftMeUp.mock.calls[0][0]).toStrictEqual({
 			ownership: undefined,
 			since: undefined,
 			status: undefined,
@@ -199,12 +199,15 @@ describe("tideliftMeUpCli", () => {
 		expect(process.exitCode).toBe(1);
 	});
 
-	it("throws an error when --username isn't provided and getNpmWhoami returns undefined", async () => {
+	it("logs an error when --username isn't provided and getNpmWhoami returns undefined", async () => {
 		mockGetNpmWhoami.mockResolvedValue(undefined);
 
-		await expect(() => tideliftMeUpCli([])).rejects.toEqual(
-			new Error("Either log in to npm or provide a username with --username."),
+		await tideliftMeUpCli([]);
+
+		expect(mockError).toHaveBeenCalledWith(
+			chalk.red("Either log in to npm or provide a username with --username."),
 		);
+		expect(process.exitCode).toBe(1);
 		expect(mockTideliftMeUp).not.toHaveBeenCalled();
 	});
 
