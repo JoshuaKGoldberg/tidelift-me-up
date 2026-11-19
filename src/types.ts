@@ -1,5 +1,7 @@
 import { PackageData } from "npm-username-to-packages";
 
+import type { packageOwnerships, packageStatuses } from "./cli/choices.js";
+
 export type EstimatedPackage =
 	| EstimatedPackageLifted
 	| EstimatedPackageNotLifted;
@@ -18,15 +20,6 @@ export interface EstimatedPackageNotLifted extends EstimatedPackageBase {
 	lifted: false;
 }
 
-export const packageOwnerships = ["author", "maintainer", "publisher"] as const;
-
 export type PackageOwnership = (typeof packageOwnerships)[number];
-
-export const packageStatuses = [
-	"all",
-	"available",
-	"lifted",
-	"needs-subscribers",
-] as const;
 
 export type PackageStatus = (typeof packageStatuses)[number];

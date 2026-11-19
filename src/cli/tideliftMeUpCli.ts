@@ -7,7 +7,7 @@ import { parseOwnership } from "../parseOwnership.js";
 import { jsonReporter } from "../reporters/jsonReporter.js";
 import { textReporter } from "../reporters/textReporter.js";
 import { tideliftMeUp, TideliftMeUpError } from "../tideliftMeUp.js";
-import { packageOwnerships, packageStatuses } from "../types.js";
+import { packageOwnerships, packageStatuses } from "./choices.js";
 
 const reporters = {
 	json: jsonReporter,
