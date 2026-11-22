@@ -2,7 +2,7 @@ import { defineConfig } from "tsdown";
 
 export default defineConfig({
 	dts: true,
-	entry: ["src/cli/tideliftMeUpCli.ts", "src/index.ts"],
+	entry: ["src/index.ts", "src/cli/tideliftMeUpCli.ts"],
 	fixedExtension: false,
 	unbundle: true,
 });
