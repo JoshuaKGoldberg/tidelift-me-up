@@ -1,6 +1,6 @@
 import chalk from "chalk";
 
-import { EstimatedPackage } from "../types.js";
+import { EstimatedPackage } from "../types.ts";
 
 export function textReporter(estimatedPackages: EstimatedPackage[]) {
 	const formatter = new Intl.NumberFormat("en-US", {

@@ -1,12 +1,12 @@
 import { describe, expect, it, vi } from "vitest";
 
-import { getPackageEstimates } from "./getPackageEstimates.js";
+import { getPackageEstimates } from "./getPackageEstimates.ts";
 
 const mockFetch = vi.fn();
 
 vi.stubGlobal("fetch", mockFetch);
 
-describe("getPackageEstimates", () => {
+describe(getPackageEstimates, () => {
 	it("maps estimated data", async () => {
 		mockFetch.mockResolvedValue({
 			json: () => [

@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 
-import { assertValidOwnership } from "./assertValidOwnership.js";
+import { assertValidOwnership } from "./assertValidOwnership.ts";
 
-describe("assertValidOwnership", () => {
+describe(assertValidOwnership, () => {
 	it("does not throw an error when ownership is undefined", () => {
 		expect(() => {
 			assertValidOwnership(undefined);
@@ -18,7 +18,7 @@ describe("assertValidOwnership", () => {
 	it("throws an error when ownership contains invalid ownership", () => {
 		expect(() => {
 			assertValidOwnership(["abc"]);
-		}).toThrowError(
+		}).toThrow(
 			`Unknown --ownership: abc (must be one of: author, maintainer, publisher)`,
 		);
 	});

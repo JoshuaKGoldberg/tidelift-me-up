@@ -1,8 +1,8 @@
 import { describe, expect, test } from "vitest";
 
-import { parseOwnership } from "./parseOwnership.js";
+import { parseOwnership } from "./parseOwnership.ts";
 
-describe("parseOwnership", () => {
+describe(parseOwnership, () => {
 	test.each([
 		[undefined, undefined],
 		[[], []],

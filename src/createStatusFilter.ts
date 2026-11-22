@@ -1,5 +1,5 @@
-import { PackageEstimate } from "./getPackageEstimates.js";
-import { PackageStatus } from "./types.js";
+import { PackageEstimate } from "./getPackageEstimates.ts";
+import { PackageStatus } from "./types.ts";
 
 export type PackageFilter = (packageEstimate: PackageEstimate) => boolean;
 

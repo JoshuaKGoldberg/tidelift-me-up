@@ -1,11 +1,11 @@
 import npmUser from "npm-user";
 import { npmUsernameToPackages } from "npm-username-to-packages";
 
-import { createStatusFilter } from "./createStatusFilter.js";
-import { createUserPackagesFilter } from "./createUserPackagesFilter.js";
-import { getNpmWhoami } from "./getNpmWhoami.js";
-import { getPackageEstimates } from "./getPackageEstimates.js";
-import { EstimatedPackage, PackageOwnership, PackageStatus } from "./types.js";
+import { createStatusFilter } from "./createStatusFilter.ts";
+import { createUserPackagesFilter } from "./createUserPackagesFilter.ts";
+import { getNpmWhoami } from "./getNpmWhoami.ts";
+import { getPackageEstimates } from "./getPackageEstimates.ts";
+import { EstimatedPackage, PackageOwnership, PackageStatus } from "./types.ts";
 
 export interface TideliftMeUpSettings {
 	ownership?: PackageOwnership[];
@@ -75,6 +75,7 @@ async function createUserError(username: string): Promise<Error> {
 		) {
 			return new TideliftMeUpError(`Npm user not found: ${username}.`);
 		}
+
 		return new TideliftMeUpError(`Invalid npm username: ${username}.`);
 	}
 }

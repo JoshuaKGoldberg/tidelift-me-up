@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 
-import { createFakePackageData } from "./fakes.js";
-import { tideliftMeUp, TideliftMeUpError } from "./tideliftMeUp.js";
+import { createFakePackageData } from "./fakes.ts";
+import { tideliftMeUp, TideliftMeUpError } from "./tideliftMeUp.ts";
 
 const mockNpmUsernameToPackages = vi
 	.fn()
@@ -15,13 +15,13 @@ vi.mock("npm-username-to-packages", () => ({
 
 const mockGetNpmWhoami = vi.fn();
 
-vi.mock("./getNpmWhoami.js", () => ({
+vi.mock("./getNpmWhoami.ts", () => ({
 	get getNpmWhoami() {
 		return mockGetNpmWhoami;
 	},
 }));
 
-vi.mock("./getPackageEstimates.js", () => ({
+vi.mock("./getPackageEstimates.ts", () => ({
 	getPackageEstimates: () => [],
 }));
 
@@ -33,7 +33,7 @@ vi.mock("npm-user", () => {
 	return { default: mockNpmUser };
 });
 
-describe("tideliftMeUp", () => {
+describe(tideliftMeUp, () => {
 	it("throws an error when --username isn't provided and getNpmWhoami returns undefined", async () => {
 		mockGetNpmWhoami.mockResolvedValue(undefined);
 
@@ -49,7 +49,7 @@ describe("tideliftMeUp", () => {
 		mockGetNpmWhoami.mockRejectedValue(new Error("Should not be called."));
 		mockNpmUser.mockRejectedValue(new TypeError("Username required"));
 
-		await expect(() => tideliftMeUp({ username })).rejects.toThrowError(
+		await expect(() => tideliftMeUp({ username })).rejects.toThrow(
 			`Invalid npm username: ${username}.`,
 		);
 	});
@@ -68,7 +68,7 @@ describe("tideliftMeUp", () => {
 		mockGetNpmWhoami.mockResolvedValue(username);
 		mockNpmUser.mockResolvedValue(npmUserData);
 
-		await expect(() => tideliftMeUp()).rejects.toThrowError(
+		await expect(() => tideliftMeUp()).rejects.toThrow(
 			`No packages found for npm username: ${username}.`,
 		);
 	});
@@ -87,7 +87,7 @@ describe("tideliftMeUp", () => {
 		mockGetNpmWhoami.mockRejectedValue(new Error("Should not be called."));
 		mockNpmUser.mockResolvedValue(npmUserData);
 
-		await expect(() => tideliftMeUp({ username })).rejects.toThrowError(
+		await expect(() => tideliftMeUp({ username })).rejects.toThrow(
 			`No packages found for npm username: ${username}.`,
 		);
 	});
@@ -103,7 +103,7 @@ describe("tideliftMeUp", () => {
 			}),
 		);
 
-		await expect(() => tideliftMeUp({ username })).rejects.toThrowError(
+		await expect(() => tideliftMeUp({ username })).rejects.toThrow(
 			`Npm user not found: ${username}.`,
 		);
 	});
