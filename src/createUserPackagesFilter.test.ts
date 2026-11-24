@@ -1,11 +1,11 @@
 import { describe, expect, it } from "vitest";
 
-import { createUserPackagesFilter } from "./createUserPackagesFilter.js";
-import { createFakePackageData } from "./fakes.js";
+import { createUserPackagesFilter } from "./createUserPackagesFilter.ts";
+import { createFakePackageData } from "./fakes.ts";
 
 const username = "abc123";
 
-describe("createUserPackagesFilter", () => {
+describe(createUserPackagesFilter, () => {
 	it("filters a package when its date predates since", () => {
 		const filter = createUserPackagesFilter({
 			ownership: ["author"],

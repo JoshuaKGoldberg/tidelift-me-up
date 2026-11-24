@@ -1,4 +1,4 @@
-import { argsOptions } from "./argsOptions.js";
+import { argsOptions } from "./argsOptions.ts";
 
 export function logHelp() {
 	console.log(

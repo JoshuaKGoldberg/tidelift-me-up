@@ -1,6 +1,6 @@
 import { expect, test, vi } from "vitest";
 
-import { logHelp } from "./logHelp.js";
+import { logHelp } from "./logHelp.ts";
 
 test("logHelp", () => {
 	const mockLog = vi.fn();

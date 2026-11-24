@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 
-import { getNpmWhoami } from "./getNpmWhoami.js";
+import { getNpmWhoami } from "./getNpmWhoami.ts";
 
 const mockNpmWhoami = vi.fn();
 
@@ -10,7 +10,7 @@ vi.mock("npm-whoami", () => ({
 	},
 }));
 
-describe("getNpmWhoami", () => {
+describe(getNpmWhoami, () => {
 	it("returns the result when npmWhoami calls its callback with a result", async () => {
 		const username = "abc123";
 

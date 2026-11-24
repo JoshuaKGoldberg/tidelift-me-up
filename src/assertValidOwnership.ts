@@ -1,4 +1,4 @@
-import { PackageOwnership } from "./types.js";
+import { PackageOwnership } from "./types.ts";
 
 const packageOwnerships = ["author", "maintainer", "publisher"];
 

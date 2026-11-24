@@ -1,8 +1,7 @@
 import { PackageData } from "npm-username-to-packages";
 
 export type EstimatedPackage =
-	| EstimatedPackageLifted
-	| EstimatedPackageNotLifted;
+	EstimatedPackageLifted | EstimatedPackageNotLifted;
 
 export interface EstimatedPackageBase {
 	data: PackageData;
@@ -21,7 +20,4 @@ export interface EstimatedPackageNotLifted extends EstimatedPackageBase {
 export type PackageOwnership = "author" | "maintainer" | "publisher";
 
 export type PackageStatus =
-	| "all"
-	| "available"
-	| "lifted"
-	| "needs-subscribers";
+	"all" | "available" | "lifted" | "needs-subscribers";

@@ -1,3 +1,3 @@
-export * from "./cli/tideliftMeUpCli.js";
-export * from "./tideliftMeUp.js";
-export * from "./types.js";
+export * from "./cli/tideliftMeUpCli.ts";
+export * from "./tideliftMeUp.ts";
+export * from "./types.ts";

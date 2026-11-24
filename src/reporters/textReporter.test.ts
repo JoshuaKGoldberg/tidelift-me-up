@@ -1,10 +1,10 @@
 import chalk from "chalk";
 import { describe, expect, it, vi } from "vitest";
 
-import { createFakePackageData } from "../fakes.js";
-import { textReporter } from "./textReporter.js";
+import { createFakePackageData } from "../fakes.ts";
+import { textReporter } from "./textReporter.ts";
 
-describe("textReporter", () => {
+describe(textReporter, () => {
 	it("logs a package as already lifted when it is", () => {
 		const logger = vi.spyOn(console, "log").mockImplementation(() => undefined);
 

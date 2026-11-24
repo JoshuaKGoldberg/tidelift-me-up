@@ -1,15 +1,15 @@
 import chalk from "chalk";
 import { parseArgs } from "node:util";
 
-import { assertValidOwnership } from "../assertValidOwnership.js";
-import { getNpmWhoami } from "../getNpmWhoami.js";
-import { parseOwnership } from "../parseOwnership.js";
-import { jsonReporter } from "../reporters/jsonReporter.js";
-import { textReporter } from "../reporters/textReporter.js";
-import { tideliftMeUp, TideliftMeUpError } from "../tideliftMeUp.js";
-import { PackageStatus } from "../types.js";
-import { argsOptions } from "./argsOptions.js";
-import { logHelp } from "./logHelp.js";
+import { assertValidOwnership } from "../assertValidOwnership.ts";
+import { getNpmWhoami } from "../getNpmWhoami.ts";
+import { parseOwnership } from "../parseOwnership.ts";
+import { jsonReporter } from "../reporters/jsonReporter.ts";
+import { textReporter } from "../reporters/textReporter.ts";
+import { tideliftMeUp, TideliftMeUpError } from "../tideliftMeUp.ts";
+import { PackageStatus } from "../types.ts";
+import { argsOptions } from "./argsOptions.ts";
+import { logHelp } from "./logHelp.ts";
 
 const reporters = {
 	json: jsonReporter,

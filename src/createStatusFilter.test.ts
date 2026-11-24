@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 
-import { createStatusFilter } from "./createStatusFilter.js";
+import { createStatusFilter } from "./createStatusFilter.ts";
 
-describe("createStatusFilter", () => {
+describe(createStatusFilter, () => {
 	describe.each([
 		["all", true, true, true],
 		["available", false, true, false],

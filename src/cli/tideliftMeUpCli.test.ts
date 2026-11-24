@@ -1,13 +1,13 @@
 import chalk from "chalk";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { createFakePackageData } from "../fakes.js";
-import { TideliftMeUpError } from "../tideliftMeUp.js";
-import { tideliftMeUpCli } from "./tideliftMeUpCli.js";
+import { createFakePackageData } from "../fakes.ts";
+import { TideliftMeUpError } from "../tideliftMeUp.ts";
+import { tideliftMeUpCli } from "./tideliftMeUpCli.ts";
 
 const mockGetNpmWhoami = vi.fn();
 
-vi.mock("../getNpmWhoami.js", () => ({
+vi.mock("../getNpmWhoami.ts", () => ({
 	get getNpmWhoami() {
 		return mockGetNpmWhoami;
 	},
@@ -15,8 +15,8 @@ vi.mock("../getNpmWhoami.js", () => ({
 
 const mockTideliftMeUp = vi.fn();
 
-vi.mock("../tideliftMeUp.js", async () => {
-	const actual = await vi.importActual("../tideliftMeUp.js");
+vi.mock("../tideliftMeUp.ts", async () => {
+	const actual = await vi.importActual("../tideliftMeUp.ts");
 	return {
 		get tideliftMeUp() {
 			return mockTideliftMeUp;
@@ -27,13 +27,13 @@ vi.mock("../tideliftMeUp.js", async () => {
 
 const mockLogHelp = vi.fn();
 
-vi.mock("./logHelp.js", () => ({
+vi.mock("./logHelp.ts", () => ({
 	get logHelp() {
 		return mockLogHelp;
 	},
 }));
 
-describe("tideliftMeUpCli", () => {
+describe(tideliftMeUpCli, () => {
 	afterEach(() => {
 		process.exitCode = undefined;
 	});

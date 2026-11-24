@@ -1,6 +1,6 @@
 import { PackageData } from "npm-username-to-packages";
 
-import { PackageOwnership } from "./types.js";
+import { PackageOwnership } from "./types.ts";
 
 export interface FilterSettings {
 	ownership: PackageOwnership[];

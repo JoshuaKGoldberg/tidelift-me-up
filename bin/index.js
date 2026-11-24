@@ -1,4 +1,4 @@
 #!/usr/bin/env node
-import { tideliftMeUpCli } from "../lib/cli/tideliftMeUpCli.js";
+import { tideliftMeUpCli } from "../dist/cli/tideliftMeUpCli.js";
 
 await tideliftMeUpCli(process.argv.slice(2));
