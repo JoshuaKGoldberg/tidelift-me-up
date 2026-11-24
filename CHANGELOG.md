@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.7.1](https://github.com/JoshuaKGoldberg/tidelift-me-up/compare/0.7.0...0.7.1) (2026-11-24)
+
+### Bug Fixes
+
+- bump to create-typescript-app@2.87.18 ([#1076](https://github.com/JoshuaKGoldberg/tidelift-me-up/issues/1076)) ([d98f735](https://github.com/JoshuaKGoldberg/tidelift-me-up/commit/d98f7358dc3eeace20b93c8c67af9ddc37a7b42e)), closes [#1075](https://github.com/JoshuaKGoldberg/tidelift-me-up/issues/1075)
+
 ## [0.7.0](https://github.com/JoshuaKGoldberg/tidelift-me-up/compare/0.6.1...0.7.0) (2026-09-20)
 
 ### Bug Fixes
